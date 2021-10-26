@@ -1,39 +1,53 @@
-//This is the Item class, this class takes in parameters pass through an object and uses it to create object to store in the heap
-public class Item {
-	ItemType type;
-	String name;
-	int weight;
-	int value;
-	int strength;
-//this is the constructor for the class, creates the object.
-public Item(ItemType type, String name, int weight, int value, int strength) {
-	this.type = type;
-	this.name = name;
-	this.weight = weight;
-	this.value = value;
-	this.strength = strength;	
+/*Bryan Potts
+ * CPSC 240
+ * 9/26/2021
+ * Inventory Assignment
+ */
 
- }
-//this method returns the value of the weight variable
-public int getWeight() {
-	return this.weight;
-}
-//this method returns the value of the value variable, which means the price of the object
-public int getValue() {
-	return this.value;
-}
-//this method returns the name variable
-public String getName() {
-	return this.name;
-}
-//this method returns the enum type of the object
-public ItemType getType() {
-	return this.type;
-}
-//this prints out the item object when system.out.println is called on the object. it makes sure to print out the variables in the given format below
-public String toString() {
-return this.type + " " +  this.name + " " + this.weight + " " +  this.value + " " + this.strength;
+//This class creates an item to be stored in the inventory of the user
 
+public class Item{
+	
+	//variables
+	private ItemType type;
+	private String name;
+	private int weight;
+	private int value;
+	private int strength;
 
-}
+	//constructor
+	public Item(ItemType type, String name, int weight, int value, int strength){
+		this.type = type;
+		this.name = name;
+		this.weight = weight;
+		this.value = value;
+		this.strength = strength;
+	}
+
+	//get methods
+	public int getWeight(){
+		return weight;
+	}
+
+	public int getValue(){
+		return value;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public ItemType getType(){
+		return type;
+	}
+
+	//it doesn't ask for this in the design but it fits with the others
+	public int getStrength(){
+		return strength;
+	}
+
+	//returns a string of the item's contents
+	public String toString(){
+		return name + "\t\t" + weight + "\t" + value + "\t" + strength;
+	}
 }
