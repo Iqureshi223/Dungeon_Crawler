@@ -29,19 +29,8 @@ public class Map{
                         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
 	};
 
-	private char[][] map = {
-			{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                        {' ', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', ' '},
-                        {' ', 'W', '.', '.', '.', '.', '.', '.', 'W', ' '},
-                        {' ', 'W', '.', '.', '.', '.', '.', '.', 'W', ' '},
-                        {' ', 'W', '.', '.', '.', '.', '.', '.', 'W', ' '},
-                        {' ', 'W', '.', '.', '.', '.', '.', '.', 'W', ' '},
-                        {' ', 'W', '.', '.', '.', '.', '.', '.', 'W', ' '},
-                        {' ', 'W', '.', '.', '.', '.', '.', '.', 'W', ' '},
-                        {' ', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', ' '},
-                        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-	};
-
+	private char[][] map = new char[10][10] ;
+	
 	//map icon meanings:
 	// "." is nothing, entities should reside on top of these spots and move over them
 	// "W" is a wall, entities should NOT be able to pass over these spots
@@ -58,7 +47,17 @@ public class Map{
 	boolean runtime = true;
 	int runcount = 0;
 
+	//enemy control variable
+	int numEnemy = 0;
+
 	public Map(){
+		//fill in map
+		for(int i = 0; i < 10; i++){
+                        for(int j = 0; j < 10; j++){
+                        	map[i][j] = DEFAULT_MAP[i][j];
+                	}
+                }
+		
 		//create BAD entity
 		createEntity(); //this entity is for debug purposes, it should NOT appear on the map at any time
 		
@@ -120,12 +119,14 @@ public class Map{
 	//moves all entities
 	public void moveAll(){
 		while(runtime){		
+			//clears the map
 			for(int i = 0; i < 10; i++){
                         	for(int j = 0; j < 10; j++){
 					map[i][j] = DEFAULT_MAP[i][j];                        	
                 	        }
 			}
 			
+			//moves all entities
 			for(int i = 1; i < entities.size(); i++){
 				movement(entities.get(i));
 				int x = entities.get(i).getXCoor();
@@ -140,6 +141,7 @@ public class Map{
 				
 			}
 
+			//test variable, remove in final
 			if(runcount >= 5){
 	                        runtime = false;
                         }
@@ -149,8 +151,15 @@ public class Map{
 		}		
 	}
 	
-	public void combat(Entity player, Entity enemy, boolean isPlayer){
-		//would prefer to see entity class before writing
+	public void combat(Entity attacker, Entity defender){
+		Inventory AInv = attacker.getInventory();
+		Inventory DInv = defender.getInventory();
+		if(false){
+			//change this to a check for item entities
+		}
+		else{
+			//this runs normal combat, attacker should attack only.
+		}
 	}
 
 	public void createItem(Entity item){
@@ -209,7 +218,7 @@ public class Map{
 			boolean didCombat = false;
 
 			if((attemptX == playerX) && (attemptY == playerY)){
-				combat(entities.get(playerIndex), entity, entity.getIsPlayer());
+				combat(entity, entities.get(playerIndex));
 				didCombat = true;
 			}
 			
@@ -239,8 +248,4 @@ public class Map{
 			}
 		}
 	}
-	
-
-
-
 }
