@@ -20,6 +20,8 @@ switch(key) {
 		movement = 3;
 	case DOWN:
 		movement = 4;
+	default:
+		movement = 5;
 }
 return movement;
 }
