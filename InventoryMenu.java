@@ -1,11 +1,13 @@
-public class InventoryMenu {
-Input input;
+import ansi_terminal.*;
+public class InventoryMenu extends Input {
 
-public InventoryMenu() {
 
+public InventoryMenu(Key key) {
+	
 }
-public void useMenu(Input i) {
-this.input = i;
+public void useMenu() {
+
+	
 }
 
 }
