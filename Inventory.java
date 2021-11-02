@@ -103,6 +103,26 @@ public class Inventory{
 			System.out.println("\nBad input. Aborting drop");
 		}		
 	}
+	
+	//drops item without user input
+	public void drop(Item item)
+	{
+	i	try{
+			if(equippedArmor == item){
+				equippedArmor = null;
+			}
+			else if(equippedWeapon == item){
+				equippedWeapon = null;
+			}
+		
+			items.remove(item);
+
+			System.out.println("\n" + item.getName() + " has been dropped.");
+		}
+		catch(Exception e){
+			System.out.println("\nBad input. Aborting drop");
+		}
+	}
 
 	//equips a weapon, weapon will stay in inventory as well
 	public void equipWeapon(){
@@ -190,6 +210,18 @@ public class Inventory{
 	public Item getEquippedArmor()
 	{
 		return equippedArmor;
-	}	
+	}
+
+	//sets equippedWeapon without user input
+	public void setEquippedWeapon(Item weapon)
+	{
+		equippedWeapon = weapon;
+	}
+
+	//sets equippedArmor without user input
+	public void setEquippedArmor(Item armor)
+	{
+		equippedArmor = armor;
+	}
 }
 
