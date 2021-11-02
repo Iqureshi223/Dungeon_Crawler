@@ -171,6 +171,80 @@ public class Map{
 	public void movement(Entity entity){
 		if(entity.getIsPlayer()){
 			//determine based off input class
+			Input input = new Input();
+			System.out.println(input.getMovement());
+
+			//variables
+			int direction = input.getMovement();
+			int attemptX = entity.getXCoor();
+			int attemptY = entity.getYCoor();
+			boolean moveAllowed = false;
+			boolean didCombat = false;
+			boolean isOpen = false;
+
+
+			//move based on action
+			switch(direction){
+				//left
+				case 1:
+					attemptX = attemptX - 1;
+					break;
+				//right
+				case 2:
+					attemptX = attemptX + 1;
+					break;
+				//up
+				case 3:
+					attemptY = attemptY - 1;
+					break;
+				//down
+				case 4:
+					attemptY = attemptY + 1;
+					break;
+				//not movement
+				case 5:
+					System.out.println("returned 5");
+					break;
+				//other/bug handling
+				default:
+					System.out.println("Error in player movement switch case.");
+			}
+
+			//check if spot is open
+			if(map[attemptX][attemptY] == '.'){
+				isOpen = true;
+			}
+
+			//perform combat
+			if(map[attemptX][attemptY] == 'E' || map[attemptX][attemptY] == '$'){
+				Entity defense = null;
+				for(int i = 2; i < entities.size(); i++){
+					if(attemptX == entities.get(i).getXCoor()){
+						if(attemptY == entities.get(i).getYCoor()){
+							defense = entities.get(i);
+						}
+					}
+				}
+
+				if(defense == null){
+					defense = entities.get(0); //BAD entity, prevents error, don't remove
+				}
+
+				combat(entity, defense);
+				didCombat = true;
+			}
+
+			//check movement
+			if(!didCombat && isOpen){
+				moveAllowed = true;
+			}
+
+			//commit movement
+			if(moveAllowed){
+				entity.setXCoor(attemptX);
+				entity.setYCoor(attemptY);
+			}
+
 		}
 		/*
 		else if(entity.getIsItem()){
