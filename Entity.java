@@ -8,6 +8,8 @@ public class Entity
 	private boolean isPlayer;
 	private int xCoor;
 	private int yCoor;
+	private boolean isItem;
+	private boolean AIMovement;
 	
 	//constructor for entity with a name input as a parameter (user player)
 	public Entity(String name)
@@ -29,6 +31,7 @@ public class Entity
 		isPlayer = false;
 		xCoor = 1;
 		yCoor = 1;
+		AIMovement = false;
 	}
 	
 	//returns name
@@ -66,7 +69,18 @@ public class Entity
 	{
 		return yCoor;
 	}
+
+	//returns isItem
+	public boolean getIsItem()
+	{
+		return isItem;
+	}
 	
+	//returns AIMovement
+	public boolean getAIMovement()
+	{
+		return AIMovement;
+	}
 	//adds health to health
 	public void setHealth(int modHealth)
 	{
@@ -84,6 +98,7 @@ public class Entity
 	{
 		yCoor = yChange;
 	}
+	
 
 	
 }
