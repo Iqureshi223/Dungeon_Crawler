@@ -194,9 +194,7 @@ public class Map{
 					else{
 						map[x][y] = 'S';
 					}
-				}
-
-				
+				}				
 			}
 
 			//test variable, remove in final
@@ -218,6 +216,47 @@ public class Map{
 		}
 		else{
 			//this runs normal combat, attacker should attack only.
+			int attack;
+			if(AInv.getEquippedWeapon().getStrength() != null){
+				attack = AInv.getEquippedWeapon().getStrength();
+			}
+			else {
+				attack = 1;
+			}
+			int defense;
+			if(DInv.getEquippedArmor().getStrength() != null){
+				defense = DInve.getEquippedArmor().getStrength();
+			}
+			else{
+				defense = 0;
+			}
+			
+			int attack = attack - defense;
+			if(attack < 0){
+				attack = 0;
+			}
+
+			defender.setHealth(0 - attack);
+
+			//print combat results
+			System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + attack + " damage.");
+
+			//check if defender is dead
+			int health = defender.getHealth();
+			if(health <= 0){
+				System.out.println(defender.getName() + " has been defeated.");
+
+				if(defender.getIsPlayer()){
+					System.out.println("\nGAME OVER");
+					System.exit(0);
+				}
+
+				for(int i = 0; i < entities.size(); i++){
+					if(entities.get(i) == defender){
+						entities.remove(i);
+					}
+				}
+			}
 		}
 	}
 
