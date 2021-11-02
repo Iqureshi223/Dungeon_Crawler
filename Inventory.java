@@ -115,7 +115,7 @@ public class Inventory{
 				equippedWeapon = null;
 			}
 		
-			items.remove(num -1);
+			items.remove(num);
 
 		}
 		catch(Exception e){
