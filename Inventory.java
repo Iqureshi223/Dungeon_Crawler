@@ -111,7 +111,7 @@ public class Inventory{
 			if(equippedArmor == items.get(num)){
 				equippedArmor = null;
 			}
-			else if(equippedWeapon == item.get(num)){
+			else if(equippedWeapon == items.get(num)){
 				equippedWeapon = null;
 			}
 		
