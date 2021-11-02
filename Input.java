@@ -1,10 +1,11 @@
 import ansi_terminal.*;
 public class Input {
-private  Key key = Terminal.getKey();
+private  Key key;
 private int movement = 0;
 private boolean run = true;
 public Input() {
  Terminal.rawMode();
+ key = Terminal.getKey();
 }
 public Key getInput() {
 	return key;
@@ -14,6 +15,7 @@ public int getMovement() {
 switch(key) {
 	case LEFT:
 		movement = 1;
+		
 	case RIGHT:
 		movement = 2;
 	case UP:
@@ -38,13 +40,6 @@ while(run) {
 	System.out.println("R. Exit");
 
 	System.out.println("\n: ");
-	
-	switch(key){
-		case W:
-			entity.getInventory().print();
-			break;
-
-}	
 }
 }
 public void help() {
