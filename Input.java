@@ -4,7 +4,7 @@ private  Key key = Terminal.getKey();
 private int movement = 0;
 private boolean run = true;
 public Input() {
-
+ Terminal.rawMode();
 }
 public Key getInput() {
 	return key;
@@ -51,6 +51,9 @@ public void help() {
 	System.out.println("Your objective in this game is to explore the dungeon and kill all remaining foes, find and use items you find to your advantage. you can equip swords and armors to increase your attributes. Use on screen commands to move your character and preform certain actions");
 }
 
+public void defaultTerminal() {
+	Terminal.cookedMode();
+}
 }
 
 
