@@ -1,5 +1,4 @@
-/*Bryan Potts
- * CPSC 240
+
  * 9/26/2021
  * Inventory Assignment
  */
@@ -179,6 +178,18 @@ public class Inventory{
                 catch(Exception e){
                         System.out.println("\nBad input. Aborting equip");
                 }
-        }	
+        }
+
+	//returns equippedWeapon
+	public Item getEquippedWeapon()
+	{
+		return equippedWeapon;
+	}
+
+	//returns equippedArmor
+	public Item getEquippedArmor()
+	{
+		return equippedArmor;
+	}	
 }
 
