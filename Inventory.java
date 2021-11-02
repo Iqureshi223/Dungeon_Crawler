@@ -107,7 +107,7 @@ public class Inventory{
 	//drops item without user input
 	public void drop(Item item)
 	{
-	i	try{
+		try{
 			if(equippedArmor == item){
 				equippedArmor = null;
 			}
