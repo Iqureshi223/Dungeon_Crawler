@@ -108,10 +108,10 @@ public class Inventory{
 	public void drop(int num)
 	{
 		try{
-			if(equippedArmor == item){
+			if(equippedArmor == items.get(num)){
 				equippedArmor = null;
 			}
-			else if(equippedWeapon == item){
+			else if(equippedWeapon == item.get(num)){
 				equippedWeapon = null;
 			}
 		

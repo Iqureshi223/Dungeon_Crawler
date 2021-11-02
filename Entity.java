@@ -16,7 +16,7 @@ public class Entity
 	{
 		this.name = name;
 		health = 100;
-		inventory = new Inventory(10);
+		inventory = new Inventory(100);
 		isPlayer = true;
 		xCoor = 0;
 		yCoor = 0;
@@ -26,8 +26,8 @@ public class Entity
 	public Entity()
 	{
 		name = "Bob";
-		health = 200;
-		inventory = new Inventory(5);
+		health = 100;
+		inventory = new Inventory(200);
 		isPlayer = false;
 		xCoor = 1;
 		yCoor = 1;
@@ -105,11 +105,18 @@ public class Entity
 		isItem = itemSet;
 	}
 
-	//setsAIMovement
+	//sets AIMovement
 	public void setAIMovement(boolean AIMove)
 	{
 		AIMovement = AIMove;
-	}	
+	}
+	
+	//sets name
+	public void setName(String word)
+	{
+		name = word;
+	}
+		
 
 	
 }

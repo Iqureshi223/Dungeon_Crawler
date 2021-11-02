@@ -8,5 +8,9 @@ public class MainCrawler
 		Map map = new Map();
 
 		System.out.println("Welcome to Dungeon Crawlers");
+		System.out.println("You have entered the dungeon and must slay all the enemies to escape");
+		System.out.println("You may run into some weapons and armor along the way to help you on your journey");
+		System.out.println("Here are some starting materials to help you survive");
+		System.out.println("Have fun and remember: slay and don't get slayed!");
 	}
 }
