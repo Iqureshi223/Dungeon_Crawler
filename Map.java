@@ -35,7 +35,8 @@ public class Map{
 	// "." is nothing, entities should reside on top of these spots and move over them
 	// "W" is a wall, entities should NOT be able to pass over these spots
 	// "P" is the player
-	// "E" is an enemy
+	// "K" is a smart enemy (Kobold)
+	// "S" is a dumb enemy (Slime)
 	// "$" is an item
 	
 	//MAKE SURE PLAYER SPAWNS INSIDE WALLED AREAS
@@ -65,7 +66,16 @@ public class Map{
 		System.out.print("Please enter your name: ");
 		Scanner input = new Scanner(System.in);
 		String playerName = input.next();
-		createPlayer(playerName);	
+		createPlayer(playerName);
+
+		//create non player items and entities
+		createItem();
+		createItem();
+		createEntity();
+		createEntity();	
+
+		//setup map
+		firstMap();
 	}
 
 	//print the map
@@ -109,13 +119,53 @@ public class Map{
 			if(map[x][y] == '.'){
 				entity.setXCoor(x);
 				entity.setYCoor(y);
-				map[entity.getXCoor()][entity.getYCoor()] = 'E';
+				if(entity.getAIMovement()){
+					map[entity.getXCoor()][entity.getYCoor()] = 'K';
+				}
+				else{
+					map[entity.getXCoor()][entity.getYCoor()] = 'S';
+				}
 				createCheck = true;
 			}
 		}
+		entity.setIsItem(false);
 		entities.add(entity);
 	}
+
+	//first time map setup
+	public void firstMap(){
+		//clears the map
+                for(int i = 0; i < 10; i++){
+                	for(int j = 0; j < 10; j++){
+                        	map[i][j] = DEFAULT_MAP[i][j];
+                        }
+                }
+
+                //moves all entities
+                for(int i = 1; i < entities.size(); i++){
+                	int x = entities.get(i).getXCoor();
+                        int y = entities.get(i).getYCoor();
+                        if(entities.get(i).getIsPlayer()){
+                        	map[x][y] = 'P';
+                        }
+                        else if(entities.get(i).getIsItem()){
+                        	map[x][y] = '$';
+                       	}
+                        else{
+                        	if(entities.get(i).getAIMovement()){
+                                        map[x][y] = 'K';
+                                }
+                                else{
+                                        map[x][y] = 'S';
+                                }
+                       	}
+               	}
+
+		//print the map
+		printMap();
+	}
 	
+
 	//moves all entities
 	public void moveAll(){
 		while(runtime){		
@@ -134,8 +184,16 @@ public class Map{
 				if(entities.get(i).getIsPlayer()){
 					map[x][y] = 'P';
 				}
+				else if(entities.get(i).getIsItem()){
+					map[x][y] = '$';
+				}
 				else{
-					map[x][y] = 'E';
+					if(entities.get(i).getAIMovement()){
+						map[x][y] = 'K';
+					}
+					else{
+						map[x][y] = 'S';
+					}
 				}
 
 				
@@ -154,17 +212,40 @@ public class Map{
 	public void combat(Entity attacker, Entity defender){
 		Inventory AInv = attacker.getInventory();
 		Inventory DInv = defender.getInventory();
-		if(false){
-			//change this to a check for item entities
+		if(defender.getIsItem()){
+			//this should activate the prompt for picking up items
+			
 		}
 		else{
 			//this runs normal combat, attacker should attack only.
 		}
 	}
 
-	public void createItem(Entity item){
+	public void createItem(){
 		//this method creates an entity that is just an item, needs an entity to take an item from it's inventory
-		//creates and adds an item entity to the arraylist
+		//creates and adds an item entity
+		Entity entity = new Entity();
+                boolean createCheck = false;
+                Random rand = new Random();
+                while(!createCheck){
+                        int x = rand.nextInt(10);
+                        int y = rand.nextInt(10);
+                        if(map[x][y] == '.'){
+                                entity.setXCoor(x);
+                                entity.setYCoor(y);
+                                map[entity.getXCoor()][entity.getYCoor()] = '$';
+                                createCheck = true;
+                        }
+                }
+                entity.setIsItem(true);
+		
+		//add one item to it's inventory
+		Inventory entityInv = entity.getInventory();
+		ItemGenerator genItem = new ItemGenerator();
+		entityInv.add(genItem.generate());
+
+		//add to arraylist
+                entities.add(entity);
 	}
 
 	//this determines movement for entities
@@ -246,11 +327,10 @@ public class Map{
 			}
 
 		}
-		/*
 		else if(entity.getIsItem()){
 			// item should not move
+			// this can be left blank
 		}
-		*/
 		else{
 			//general ai movement
 			boolean moveAllowed = false;
@@ -270,23 +350,54 @@ public class Map{
 			int attemptX = entity.getXCoor();
 			int attemptY = entity.getYCoor();
 
-			//caclulate new x coor
-			if(entity.getXCoor() < playerX){
-			 	attemptX = entity.getXCoor() + 1;
-				hasNotMoved = false;
-			}
-			else if(entity.getXCoor() > playerX){
-                                attemptX = entity.getXCoor() - 1;
-				hasNotMoved = false;
-                        }
+			//check for AI type
+			if(entity.getAIMovement()){
+
+				//caclulate new x coor
+				if(entity.getXCoor() < playerX){
+			 		attemptX = entity.getXCoor() + 1;
+					hasNotMoved = false;
+				}
+				else if(entity.getXCoor() > playerX){
+                                	attemptX = entity.getXCoor() - 1;
+					hasNotMoved = false;
+                        	}
 			
-			//calculate new y coor
-			if((entity.getYCoor() > playerY) && hasNotMoved){
-                                attemptY = entity.getYCoor() - 1;
-                        }
-			else if((entity.getYCoor() < playerY) && hasNotMoved){
-                                attemptY = entity.getYCoor() + 1;
-                        }
+				//calculate new y coor
+				if((entity.getYCoor() > playerY) && hasNotMoved){
+                                	attemptY = entity.getYCoor() - 1;
+                        	}
+				else if((entity.getYCoor() < playerY) && hasNotMoved){
+                                	attemptY = entity.getYCoor() + 1;
+                        	}
+
+			}
+			//dumb AI movement
+			else{
+				Random rand = new Random();
+				int direction = rand.nextInt(4);
+
+                        	switch(direction){
+                                	//left
+                                	case 0:
+                                        	attemptX = attemptX - 1;
+                                        	break;
+                                	//right
+                               		case 1:
+                                        	attemptX = attemptX + 1;
+                                        	break;
+                                	//up
+                                	case 2:
+                                        	attemptY = attemptY - 1;
+                                        	break;
+                                	//down
+                                	case 3:
+                                        	attemptY = attemptY + 1;
+                                        	break;
+					default:
+						System.out.println("Error in Entity AI movement (dumb)");
+				}
+			}
 
 			//calculate if this causes combat
 			boolean didCombat = false;
