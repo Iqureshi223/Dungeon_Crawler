@@ -15,15 +15,19 @@ public int getMovement() {
 switch(key) {
 	case LEFT:
 		movement = 1;
-		
+		break;	
 	case RIGHT:
 		movement = 2;
+		break;
 	case UP:
 		movement = 3;
+		break;
 	case DOWN:
 		movement = 4;
+		break;
 	default:
 		movement = 5;
+		break;
 }
 return movement;
 }
@@ -40,6 +44,11 @@ while(run) {
 	System.out.println("R. Exit");
 
 	System.out.println("\n: ");
+
+	switch(key){
+		case W: 
+			entity.getInventory().print();
+}
 }
 }
 public void help() {
