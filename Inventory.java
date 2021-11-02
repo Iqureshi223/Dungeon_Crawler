@@ -105,7 +105,7 @@ public class Inventory{
 	}
 	
 	//drops item without user input
-	public void drop(Item item)
+	public void drop(int num)
 	{
 		try{
 			if(equippedArmor == item){
@@ -115,9 +115,8 @@ public class Inventory{
 				equippedWeapon = null;
 			}
 		
-			items.remove(item);
+			items.remove(num -1);
 
-			System.out.println("\n" + item.getName() + " has been dropped.");
 		}
 		catch(Exception e){
 			System.out.println("\nBad input. Aborting drop");
@@ -222,6 +221,12 @@ public class Inventory{
 	public void setEquippedArmor(Item armor)
 	{
 		equippedArmor = armor;
+	}
+
+	//returns ArrayList of items
+	public ArrayList getItems()
+	{
+		return items;
 	}
 }
 
