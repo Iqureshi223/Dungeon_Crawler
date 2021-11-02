@@ -103,6 +103,12 @@ public class Entity
 	public void setIsItem(boolean itemSet)
 	{
 		isItem = itemSet;
+	}
+
+	//setsAIMovement
+	public void setAIMovement(boolean AIMove)
+	{
+		AIMovement = AIMove;
 	}	
 
 	
