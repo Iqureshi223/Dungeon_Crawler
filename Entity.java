@@ -99,6 +99,11 @@ public class Entity
 		yCoor = yChange;
 	}
 	
+	//sets isItem
+	public void setIsItem(boolean itemSet)
+	{
+		isItem = itemSet;
+	}	
 
 	
 }
