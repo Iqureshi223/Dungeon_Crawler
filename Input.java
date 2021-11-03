@@ -39,7 +39,6 @@ switch(key) {
 
 	default:
 		movement = 5;
-		break;
 }
 return movement;
 }
@@ -47,8 +46,6 @@ return movement;
 public void openInventory() {
 	
 while(run) {
-	key = Terminal.getKey();	
-
 	System.out.println("------------------");
 	System.out.println("W. Print inventory");
 	System.out.println("X. Add random item");
@@ -59,7 +56,10 @@ while(run) {
 	System.out.println("ESCAPE. quit the game");
 
 	System.out.println("\n: ");
-	
+
+
+	Terminal.rawMode();
+	key = Terminal.getKey();
 	switch(key){
 		case W: 
 			entity.getInventory().print();
