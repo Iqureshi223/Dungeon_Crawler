@@ -1,10 +1,8 @@
-import java.util.Scanner;
-
 public class MainCrawler
 {
 	public static void main (String [] args)
 	{
-		Scanner in = new Scanner(System.in);
+		//creates a map which runs the game and creates a setting and plot for the game
 		Map map = new Map();
 
 		System.out.println("Welcome to Dungeon Crawlers");
