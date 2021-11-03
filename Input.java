@@ -29,12 +29,10 @@ switch(key) {
 		movement = 4;
 		break;
 	case I:
-		key = Terminal.getKey();
 		openInventory();
 		movement = 5;
 		break;
 	case i:
-		key = Terminal.getKey();
 		openInventory();
 		movement = 5;
 		break;
@@ -47,9 +45,10 @@ return movement;
 }
 
 public void openInventory() {
-
-while(run) {
 	
+while(run) {
+	key = Terminal.getKey();	
+
 	System.out.println("------------------");
 	System.out.println("W. Print inventory");
 	System.out.println("X. Add random item");
@@ -60,7 +59,7 @@ while(run) {
 	System.out.println("ESCAPE. quit the game");
 
 	System.out.println("\n: ");
-
+	
 	switch(key){
 		case W: 
 			entity.getInventory().print();
