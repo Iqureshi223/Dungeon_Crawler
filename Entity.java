@@ -15,7 +15,7 @@ public class Entity
 	public Entity(String name)
 	{
 		this.name = name;
-		health = 100;
+		health = 50;
 		inventory = new Inventory(100);
 		isPlayer = true;
 		xCoor = 0;
@@ -26,7 +26,7 @@ public class Entity
 	public Entity()
 	{
 		name = "Bob";
-		health = 100;
+		health = 50;
 		inventory = new Inventory(200);
 		isPlayer = false;
 		xCoor = 1;
