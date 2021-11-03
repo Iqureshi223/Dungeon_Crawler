@@ -376,6 +376,9 @@ public class Map{
 
 			//print combat results
 			System.out.println(attacker.getName() + " attacks " + defender.getName() + " for " + damage + " damage.");
+			if(defender.getIsPlayer()){
+				System.out.println("Player health: " + defender.getHealth());
+			}
 
 			//check if defender is dead
 			int health = defender.getHealth();
@@ -384,7 +387,7 @@ public class Map{
 
 				//lose condition
 				if(defender.getIsPlayer()){
-					System.out.println("\nGAME OVER");
+					System.out.println("\nGAME OVER\n");
 					System.exit(0);
 				}
 
