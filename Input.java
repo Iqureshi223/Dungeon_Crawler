@@ -29,6 +29,7 @@ switch(key) {
 		break;
 	case I:
 		openInventory();
+		movement = 5;
 		break;
 	default:
 		movement = 5;
