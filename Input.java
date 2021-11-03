@@ -1,13 +1,14 @@
 import ansi_terminal.*;
 public class Input {
-private  Key key;
 private Entity entity;
+private Key key;
 private int movement = 0;
 private boolean run = true;
+
 public Input(Entity ent) {
 this.entity = ent; 
 Terminal.rawMode();
- key = Terminal.getKey();
+key = Terminal.getKey();
 }
 public Key getInput() {
 	return key;
@@ -28,10 +29,12 @@ switch(key) {
 		movement = 4;
 		break;
 	case I:
+		key = Terminal.getKey();
 		openInventory();
 		movement = 5;
 		break;
 	case i:
+		key = Terminal.getKey();
 		openInventory();
 		movement = 5;
 		break;
@@ -96,8 +99,7 @@ while(run) {
 			System.exit(0);
 			break;
 		default:
-			System.out.println("\nThe is not a valid selection, please try again.");
-			break;
+			System.out.println("invalid input, please enter a valid input");
 }
 }
 }
