@@ -12,5 +12,8 @@ public class MainCrawler
 		System.out.println("You may run into some weapons and armor along the way to help you on your journey");
 		System.out.println("Here are some starting materials to help you survive");
 		System.out.println("Have fun and remember: slay and don't get slayed!");
+
+		map.moveAll();
+		System.out.println("Congratualtions! You have won the game!");
 	}
 }
