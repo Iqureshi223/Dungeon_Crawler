@@ -31,6 +31,11 @@ switch(key) {
 		openInventory();
 		movement = 5;
 		break;
+	case i:
+		openInventory();
+		movement = 5;
+		break;
+
 	default:
 		movement = 5;
 		break;
@@ -57,18 +62,35 @@ while(run) {
 		case W: 
 			entity.getInventory().print();
 			break;
+		case w:
+			entity.getInventory().print();
+			break;
+
 		case Y:
+			entity.getInventory().drop();
+			break;
+		case y:
 			entity.getInventory().drop();
 			break;
 		case Z:
 			entity.getInventory().equipWeapon();
 			break;
+		case z:
+			entity.getInventory().equipWeapon();
+			break;
 		case Q:
+			entity.getInventory().equipArmor();
+			break;
+		case q:
 			entity.getInventory().equipArmor();
 			break;
 		case R:
 			run = false;
 			break;
+		case r:
+			run = false;
+			break;
+
 		case ESCAPE:
 			System.out.println("exiting the game");
 			System.exit(0);
