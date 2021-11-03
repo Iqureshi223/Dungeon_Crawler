@@ -60,6 +60,7 @@ while(run) {
 
 	Terminal.rawMode();
 	key = Terminal.getKey();
+	Terminal.cookedMode();
 	switch(key){
 		case W: 
 			entity.getInventory().print();
