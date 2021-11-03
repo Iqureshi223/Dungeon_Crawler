@@ -36,7 +36,14 @@ switch(key) {
 		openInventory();
 		movement = 5;
 		break;
-
+	case H:
+		help();
+		movement = 5;
+		break;
+	case h:
+		help();
+		movement = 5;
+		break;
 	default:
 		movement = 5;
 }
@@ -48,14 +55,13 @@ public void openInventory() {
 while(run) {
 	System.out.println("------------------");
 	System.out.println("W. Print inventory");
-	System.out.println("X. Add random item");
 	System.out.println("Y. Drop item");
 	System.out.println("Z. Equip Weapon");
 	System.out.println("Q. Equip Armor");
 	System.out.println("R. Exit");
 	System.out.println("ESCAPE. quit the game");
 
-	System.out.println("\n: ");
+	System.out.print("\n: ");
 
 
 	Terminal.rawMode();
