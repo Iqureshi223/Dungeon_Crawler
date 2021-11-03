@@ -86,6 +86,8 @@ public class Map{
 		createItem();
 		createEntity();
 		createEntity();	
+		createEntity();
+		createEntity();
 
 		//setup map
 		firstMap();
@@ -283,12 +285,14 @@ public class Map{
 				runtime = false;
 			}
 
+			/*
 			//test variable, remove in final
 			if(runcount >= 100){
 	                        runtime = false;
                         }
 
 			runcount++;
+			*/
 			printMap();
 		}		
 	}
@@ -349,6 +353,9 @@ public class Map{
 				default:
 					System.out.println("Bad input. Item was not picked up.");	
 			}			
+		}
+		else if(attacker.getIsPlayer() && defender.getIsPlayer()){
+			//nothing should happen here since this is the case where the player would attack themselves
 		}
 		else{
 			//this runs normal combat, attacker should attack only.
@@ -434,7 +441,7 @@ public class Map{
 	public void movement(Entity entity){
 		if(entity.getIsPlayer()){
 			//determine based off input class
-			Input input = new Input();
+			Input input = new Input(entity);
 			input.defaultTerminal();
 
 			//variables
