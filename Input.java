@@ -1,19 +1,22 @@
+//library created by the professor to allow inputs without hitting enter
 import ansi_terminal.*;
 public class Input {
+//creates variables to use within the class as well as a Entity and key variable
 private Entity entity;
 private Key key;
 private int movement = 0;
 private boolean run = true;
-
+//constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
 public Input(Entity ent) {
 this.entity = ent; 
 Terminal.rawMode();
 key = Terminal.getKey();
 }
+//returns the value stored into key
 public Key getInput() {
 	return key;
 }
-
+//returns an integer that the map class uses to move the characters as well as access openInventory and help method
 public int getMovement() {
 switch(key) {
 	case LEFT:
@@ -49,9 +52,9 @@ switch(key) {
 }
 return movement;
 }
-
+//using the entity variable allows user to access the methods within Inventory to move around and equip their items. it also allows them to quit both the menu and the game
 public void openInventory() {
-	
+//the while loop the runs while the user is operating the inventory menu. will not stop until the user chooses the option to quit
 while(run) {
 	System.out.println("------------------");
 	System.out.println("W. Print inventory");
@@ -109,10 +112,28 @@ while(run) {
 }
 }
 }
+//displays instructions on how to play the game
 public void help() {
-	System.out.println("Your objective in this game is to explore the dungeon and kill all remaining foes, find and use items you find to your advantage. you can equip swords and armors to increase your attributes. Use on screen commands to move your character and preform certain actions");
-}
+	System.out.println("Arrow Keys to move");
+	System.out.println("I: access menus to modify inventory and game settings");
+	System.out.println("H: see game instructions");
+	System.out.println("W: see what is stored in your inventory");
+	System.out.println("Y: drop an item in your inventory");
+	System.out.println("Z: equip a weapon");
+	System.out.println("Q: equip an Armor set");
+	System.out.println("R: exit the game menu");
+	System.out.println("ESCAPE: exit the game");
+	System.out.println(".: an open spot the character can move on the map");
+	System.out.println("W: a wall a player can't move past");
+	System.out.println("P: is the player's icon");
+	System.out.println("A: is an aggressive enemy that hunts the player down");
+	System.out.println("D: is a passive enemy that roams the dungeon");
+	System.out.println("$: is an item for the player to pick up");
 
+
+
+}
+//returns the terminal back to the default mode 
 public void defaultTerminal() {
 	Terminal.cookedMode();
 }
