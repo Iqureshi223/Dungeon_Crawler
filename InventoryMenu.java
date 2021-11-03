@@ -1,8 +1,8 @@
-import ansi_terminal.*;
-public class InventoryMenu extends Input {
+
+public class InventoryMenu{
 
 
-public InventoryMenu(Key key) {
+public InventoryMenu() {
 	
 }
 public void useMenu() {

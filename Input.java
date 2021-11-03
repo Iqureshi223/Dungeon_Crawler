@@ -1,10 +1,12 @@
 import ansi_terminal.*;
 public class Input {
 private  Key key;
+private Entity entity;
 private int movement = 0;
 private boolean run = true;
-public Input() {
- Terminal.rawMode();
+public Input(Entity ent) {
+this.entity = ent; 
+Terminal.rawMode();
  key = Terminal.getKey();
 }
 public Key getInput() {
@@ -25,6 +27,9 @@ switch(key) {
 	case DOWN:
 		movement = 4;
 		break;
+	case I:
+		openInventory();
+		break;
 	default:
 		movement = 5;
 		break;
@@ -32,7 +37,8 @@ switch(key) {
 return movement;
 }
 
-public void openInventory(Entity entity) {
+public void openInventory() {
+
 while(run) {
 	
 	System.out.println("------------------");
@@ -42,12 +48,33 @@ while(run) {
 	System.out.println("Z. Equip Weapon");
 	System.out.println("Q. Equip Armor");
 	System.out.println("R. Exit");
+	System.out.println("ESCAPE. quit the game");
 
 	System.out.println("\n: ");
 
 	switch(key){
 		case W: 
 			entity.getInventory().print();
+			break;
+		case Y:
+			entity.getInventory().drop();
+			break;
+		case Z:
+			entity.getInventory().equipWeapon();
+			break;
+		case Q:
+			entity.getInventory().equipArmor();
+			break;
+		case R:
+			run = false;
+			break;
+		case ESCAPE:
+			System.out.println("exiting the game");
+			System.exit(0);
+			break;
+		default:
+			System.out.println("\nThe is not a valid selection, please try again.");
+			break;
 }
 }
 }
