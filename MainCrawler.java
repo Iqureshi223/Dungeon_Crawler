@@ -10,7 +10,7 @@ public class MainCrawler
 		System.out.println("You may run into some weapons and armor along the way to help you on your journey");
 		System.out.println("Here are some starting materials to help you survive");
 		System.out.println("Have fun and remember: slay and don't get slayed!");
-
+		//commands for the player to follow
 		System.out.println("Here are the instructions for the game");
 		System.out.println("Arrow Keys to move");
 		System.out.println("I: access menus to modify inventory and game settings");
@@ -27,6 +27,7 @@ public class MainCrawler
 		System.out.println("A: is an aggressive enemy that hunts the player down");
 		System.out.println("D: is a passive enemy that roams the dungeon");
 		System.out.println("$: is an item for the player to pick up");
+		System.out.println("Enter: to continue and confirm inventory choices");
 
 
 
