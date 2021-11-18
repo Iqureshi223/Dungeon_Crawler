@@ -1,6 +1,5 @@
 
-
-public class Entity
+abstract class Entity
 {
 	private String name;
 	private int health;
