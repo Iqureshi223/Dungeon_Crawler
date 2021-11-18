@@ -10,6 +10,7 @@ public class Entity
 	private int yCoor;
 	private boolean isItem;
 	private boolean AIMovement;
+	private boolean isStairs;
 	
 	//constructor for entity with a name input as a parameter (user player)
 	public Entity(String name)
@@ -20,6 +21,7 @@ public class Entity
 		isPlayer = true;
 		xCoor = 0;
 		yCoor = 0;
+		isStairs = false;
 	}
 	
 	//constructor for entity with set name (enemy)
@@ -32,6 +34,7 @@ public class Entity
 		xCoor = 1;
 		yCoor = 1;
 		AIMovement = false;
+		isStairs = false;
 	}
 	
 	//returns name
@@ -81,6 +84,13 @@ public class Entity
 	{
 		return AIMovement;
 	}
+
+	//returns isStairs
+	public boolean getIsStairs()
+	{
+		return isStairs;
+	}
+
 	//adds health to health
 	public void setHealth(int modHealth)
 	{
@@ -116,7 +126,12 @@ public class Entity
 	{
 		name = word;
 	}
-		
+	
+	//sets isStairs
+	public void setIsStairs(boolean stairs)
+	{
+		isStairs = stairs;
+	}	
 
 	
 }
