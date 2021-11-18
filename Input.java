@@ -1,9 +1,12 @@
 //library created by the professmor to allow inputs without hitting enter
 import ansi_terminal.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.PrintWriter;
+import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Input {
 //creates variables to use within the class as well as a Entity and key variable
@@ -11,7 +14,10 @@ private Entity entity;
 private Key key;
 private int movement = 0;
 private boolean run = true;
+ArrayList<String>room = new ArrayList<String>(); 
 PrintWriter pw;
+FileReader read;
+Scanner s;
 //constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
 public Input(Entity ent) {
 this.entity = ent;
@@ -143,8 +149,22 @@ public void help() {
 public void defaultTerminal() {
 	Terminal.cookedMode();
 }
-public void getRoom() {
-
+public ArrayList<String> getRoom(int roomNumber) {
+	int i = 0;
+	try{
+		read = new FileReader("map" + roomNumber +".txt");
+		s = new Scanner(read);
+		while(s.hasNextLine()) {
+			String[] lines = s.nextLine().split(",");
+			String line = lines[i];
+			i = i + 1;
+		}
+		return room;
+	}catch(FileNotFoundException e) {
+		System.out.println("File not Found!");
+	}
+ 	return room;
+	
 }
 public void store() {
 	try{
