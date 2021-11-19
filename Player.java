@@ -13,11 +13,16 @@ public class Player extends Entity
 		xCoor = 0;
 		yCoor = 0;
 	}
-	
-	
 	//modifies isPlayer
 	public boolean setIsPlayer(boolean play)
 	{
 		isPlayer = play;
+=======
+	//returns isStairs
+	public boolean getIsStairs()
+	{
+		return isStairs;
 	}
+
+
 }
