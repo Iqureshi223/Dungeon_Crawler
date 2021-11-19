@@ -1,39 +1,24 @@
 
 abstract class Entity
+
 {
-	private String name;
-	private int health;
-	private Inventory inventory;
-	private boolean isPlayer;
-	private int xCoor;
-	private int yCoor;
-	private boolean isItem;
-	private boolean AIMovement;
-	private boolean isStairs;
-	
-	//constructor for entity with a name input as a parameter (user player)
-	public Entity(String name)
-	{
-		this.name = name;
-		health = 50;
-		inventory = new Inventory(100);
-		isPlayer = true;
-		xCoor = 0;
-		yCoor = 0;
-		isStairs = false;
-	}
-	
+	protected String name;
+	protected int health;
+	protected Inventory inventory;
+	protected boolean isPlayer;
+	protected int xCoor;
+	protected int yCoor;
+	protected boolean isItem;
+		
 	//constructor for entity with set name (enemy)
 	public Entity()
 	{
 		name = "Bob";
 		health = 50;
-		inventory = new Inventory(200);
+		inventory = new Inventory(100);
 		isPlayer = false;
 		xCoor = 1;
 		yCoor = 1;
-		AIMovement = false;
-		isStairs = false;
 	}
 	
 	//returns name
@@ -41,96 +26,49 @@ abstract class Entity
 	{
 		return name;
 	}
-
 	//returns health
 	public int getHealth()
 	{
 		return health;
-	}	
-	
+	}
 	//returns inventory
 	public Inventory getInventory()
 	{
 		return inventory;
 	}
-	
 	//returns isPlayer
 	public boolean getIsPlayer()
 	{
 		return isPlayer;
 	}
-	
 	//returns xCoor
 	public int getXCoor()
 	{
 		return xCoor;
 	}
-	
 	//returns yCoor
 	public int getYCoor()
 	{
 		return yCoor;
 	}
-
 	//returns isItem
 	public boolean getIsItem()
 	{
 		return isItem;
 	}
-	
-	//returns AIMovement
-	public boolean getAIMovement()
-	{
-		return AIMovement;
-	}
-
-	//returns isStairs
-	public boolean getIsStairs()
-	{
-		return isStairs;
-	}
-
 	//adds health to health
-	public void setHealth(int modHealth)
-	{
-		health = health + modHealth;
-	}
-	
+	public abstract void setHealth(int addHealth);	
 	//modifies xCoor
-	public void setXCoor(int xChange)
-	{
-		xCoor = xChange;
-	}
+	public abstract void setXCoor(int xChange);
 	
 	//modifies yCoor
-	public void setYCoor(int yChange)
-	{
-		yCoor = yChange;
-	}
+	public abstract void setYCoor(int yChange);
 	
 	//sets isItem
-	public void setIsItem(boolean itemSet)
-	{
-		isItem = itemSet;
-	}
-
-	//sets AIMovement
-	public void setAIMovement(boolean AIMove)
-	{
-		AIMovement = AIMove;
-	}
+	public abstract void setIsItem(boolean itemSet);
 	
 	//sets name
-	public void setName(String word)
-	{
-		name = word;
-	}
-	
-	//sets isStairs
-	public void setIsStairs(boolean stairs)
-	{
-		isStairs = stairs;
-	}	
+	public abstract void setName(String word);
 
-	
+
 }
