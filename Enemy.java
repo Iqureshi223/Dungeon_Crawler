@@ -13,12 +13,6 @@ public class Enemy extends Entity
 	public Enemy()
 	{
 		super();
-		name = "Bob";
-		health = 50;
-		inventory = new Inventory(200);
-		isPlayer = false;
-		xCoor = 1;
-		yCoor = 1;
 		AIMovement = false;
 		isStairs = false;
 	}
