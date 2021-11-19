@@ -1,5 +1,5 @@
 
-abstract class Entity
+public class Entity
 
 {
 	protected String name;
@@ -57,18 +57,33 @@ abstract class Entity
 		return isItem;
 	}
 	//adds health to health
-	public abstract void setHealth(int addHealth);	
+	public void setHealth(int addHealth)
+	{
+		health += addHealth;
+	}	
 	//modifies xCoor
-	public abstract void setXCoor(int xChange);
+	public void setXCoor(int xChange)
+	{
+		xCoor = xChange;
+	}
 	
 	//modifies yCoor
-	public abstract void setYCoor(int yChange);
+	public void setYCoor(int yChange)
+	{
+		yCoor = yChange;
+	}
 	
 	//sets isItem
-	public abstract void setIsItem(boolean itemSet);
+	public void setIsItem(boolean itemSet)
+	{
+		isItem = itemSet;
+	}
 	
 	//sets name
-	public abstract void setName(String word);
+	public void setName(String word)
+	{
+		name = word;
+	}
 
 
 }
