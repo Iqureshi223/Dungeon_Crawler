@@ -125,7 +125,7 @@ public class Map{
 	
 	//creates a player
 	public void createPlayer(String name){
-		Entity player = new Player(name);
+		Player player = new Player(name);
 		player.setXCoor(5);
 		player.setYCoor(5);
 		map[player.getXCoor()][player.getYCoor()] = 'P';
@@ -163,7 +163,7 @@ public class Map{
 
 	//creates a non-player entitiy
 	public void createEntity(){
-		Entity entity = new Enemy();
+		Enemy entity = new Enemy();
 		boolean createCheck = false;
 		Random rand = new Random();
 		int AiNum = rand.nextInt(2);
@@ -432,7 +432,7 @@ public class Map{
 	public void createItem(){
 		//this method creates an entity that is just an item, needs an entity to take an item from it's inventory
 		//creates and adds an item entity
-		Entity entity = new ItemEntity();
+		ItemEntity entity = new ItemEntity();
                 boolean createCheck = false;
                 Random rand = new Random();
                 while(!createCheck){
@@ -458,7 +458,7 @@ public class Map{
 
 	//this method creates the stairs
 	public void createStairs(){
-                Entity entity = new ItemEntity();
+                ItemEntity entity = new ItemEntity();
                 boolean createCheck = false;
                 Random rand = new Random();
                 while(!createCheck){

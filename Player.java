@@ -1,9 +1,6 @@
 
 public class Player extends Entity
 {
-	
-	private boolean isStairs;
-
 	public Player(String name)
 	{
 		this.name = name;
@@ -14,7 +11,7 @@ public class Player extends Entity
 		yCoor = 0;
 	}
 	//modifies isPlayer
-	public boolean setIsPlayer(boolean play)
+	public void setIsPlayer(boolean play)
 	{
 		isPlayer = play;
 	}

@@ -1,4 +1,3 @@
-
 public class Entity
 
 {
@@ -9,6 +8,8 @@ public class Entity
 	protected int xCoor;
 	protected int yCoor;
 	protected boolean isItem;
+	protected boolean isStairs;
+	protected boolean AIMovement;
 		
 	//constructor for entity with set name (enemy)
 	public Entity()
@@ -19,6 +20,8 @@ public class Entity
 		isPlayer = false;
 		xCoor = 1;
 		yCoor = 1;
+		isStairs = false;
+		AIMovement = false;
 	}
 	
 	//returns name
@@ -56,6 +59,19 @@ public class Entity
 	{
 		return isItem;
 	}
+	
+	//returns isStairs
+	public boolean getIsStairs()
+	{
+		return isStairs;
+	}
+
+	//returns AIMovement
+	public boolean getAIMovement()
+	{
+		return AIMovement;
+	}
+
 	//adds health to health
 	public void setHealth(int addHealth)
 	{
@@ -85,5 +101,5 @@ public class Entity
 		name = word;
 	}
 
-
+	
 }
