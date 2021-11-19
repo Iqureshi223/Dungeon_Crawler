@@ -43,6 +43,8 @@ public class Map{
 	final int MAP_SIZE_Y = 20;
 	private char[][] map = new char[MAP_SIZE_X][MAP_SIZE_Y] ;
 	
+	private char[][] importMap;	
+	
 	int currentFloor = 1;
 
 	//map icon meanings:
@@ -67,10 +69,13 @@ public class Map{
 	int numEnemy = 0;
 
 	public Map(){
+		//import a map from files
+		ImportMap(currentFloor);
+
 		//fill in map
 		for(int i = 0; i < MAP_SIZE_X; i++){
                         for(int j = 0; j < MAP_SIZE_Y; j++){
-                        	map[i][j] = DEFAULT_MAP[i][j];
+                        	map[i][j] = importMap[i][j];
                 	}
                 }
 		
@@ -100,6 +105,35 @@ public class Map{
                 createEntity();
                 createEntity();
 		createStairs();
+	}
+
+	//depopulates the floor
+	public void depopulate(){
+		while(entities.size() > 2){
+			for(int i = 1; i < entities.size(); i++){
+				if(!entities.get(i).getIsPlayer()){
+					entities.remove(i);
+				}
+			}
+		}
+	}
+
+	//moves the player between floors
+	public void movePlayer(){
+		Entity entity = getPlayer();
+		boolean createCheck = false;
+		Random rand = new Random();
+		while(!createCheck){
+                        int x = rand.nextInt(MAP_SIZE_X);
+                        int y = rand.nextInt(MAP_SIZE_Y);
+                        if(map[x][y] == '.'){
+                                entity.setXCoor(x);
+                                entity.setYCoor(y);
+                                map[entity.getXCoor()][entity.getYCoor()] = 'P';
+                                createCheck = true;
+                       }
+                }
+
 	}
 	
 	//print the map
@@ -182,10 +216,10 @@ public class Map{
 				entity.setXCoor(x);
 				entity.setYCoor(y);
 				if(entity.getAIMovement()){
-					map[entity.getXCoor()][entity.getYCoor()] = 'A';
+					//map[entity.getXCoor()][entity.getYCoor()] = 'A';
 				}
 				else{
-					map[entity.getXCoor()][entity.getYCoor()] = 'D';
+					//map[entity.getXCoor()][entity.getYCoor()] = 'D';
 				}
 				createCheck = true;
 			}
@@ -208,7 +242,7 @@ public class Map{
 		//clears the map
                 for(int i = 0; i < MAP_SIZE_X; i++){
                 	for(int j = 0; j < MAP_SIZE_Y; j++){
-                        	map[i][j] = DEFAULT_MAP[i][j];
+                        	map[i][j] = importMap[i][j];
                         }
                 }
 
@@ -248,7 +282,7 @@ public class Map{
 			//clears the map
 			for(int i = 0; i < MAP_SIZE_X; i++){
                         	for(int j = 0; j < MAP_SIZE_Y; j++){
-					map[i][j] = DEFAULT_MAP[i][j];                        	
+					map[i][j] = importMap[i][j];                        	
                 	        }
 			}
 			
@@ -319,7 +353,15 @@ public class Map{
 	public void combat(Entity attacker, Entity defender){
 		Inventory AInv = attacker.getInventory();
 		Inventory DInv = defender.getInventory();
-		if(attacker.getIsPlayer() && defender.getIsItem()){
+		if(attacker.getIsPlayer() && defender.getIsItem() && defender.getIsStairs()){
+			//this should allow the player to move up to the next floor
+			currentFloor++;
+			if(currentFloor > 3){
+				currentFloor = 1;
+			}
+			changeFloors();
+		}
+		else if(attacker.getIsPlayer() && defender.getIsItem() && !defender.getIsStairs()){
 			//this should activate the prompt for picking up items
 			ArrayList<Item> items = DInv.getItems();
 			Item item = items.get(0);
@@ -441,7 +483,7 @@ public class Map{
                         if(map[x][y] == '.'){
                                 entity.setXCoor(x);
                                 entity.setYCoor(y);
-                                map[entity.getXCoor()][entity.getYCoor()] = '$';
+                                //map[entity.getXCoor()][entity.getYCoor()] = '$';
                                 createCheck = true;
                         }
                 }
@@ -467,7 +509,7 @@ public class Map{
                         if(map[x][y] == '.'){
                                 entity.setXCoor(x);
                                 entity.setYCoor(y);
-                                map[entity.getXCoor()][entity.getYCoor()] = 'Z';
+                                //map[entity.getXCoor()][entity.getYCoor()] = 'Z';
                                 createCheck = true;
                         }
                 }
@@ -658,4 +700,32 @@ public class Map{
 			}
 		}
 	}
+	
+	//loads in a map from a text file
+	public void ImportMap(int floorNumber){
+		/*
+		try{
+			Input input = new Input()
+		}
+		catch(Exception e){
+			importMap = DEFAULT_MAP;
+		}
+		*/
+
+		importMap = DEFAULT_MAP; //remove in final version
+	}
+
+	//change floors
+	public void changeFloors(){
+		depopulate();
+		ImportMap(currentFloor);
+		movePlayer();
+		populate();
+	}
+
+
+
+
+
+
 }
