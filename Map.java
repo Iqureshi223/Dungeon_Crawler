@@ -43,6 +43,8 @@ public class Map{
 	final int MAP_SIZE_Y = 20;
 	private char[][] map = new char[MAP_SIZE_X][MAP_SIZE_Y] ;
 	
+	int currentFloor = 1;
+
 	//map icon meanings:
 	// "." is nothing, entities should reside on top of these spots and move over them
 	// "W" is a wall, entities should NOT be able to pass over these spots
@@ -50,6 +52,7 @@ public class Map{
 	// "A" is a smart enemy (agressive)
 	// "D" is a dumb enemy (dumb)
 	// "$" is an item
+	// "Z" is a staircase to advance to next floor
 	
 	//MAKE SURE PLAYER SPAWNS INSIDE WALLED AREAS
 	
@@ -82,17 +85,23 @@ public class Map{
 		createPlayer(playerName);
 
 		//create non player items and entities
-		createItem();
-		createItem();
-		createEntity();
-		createEntity();	
-		createEntity();
-		createEntity();
+		populate();
 
 		//setup map
 		firstMap();
 	}
-
+	
+	//populate the floor
+	public void populate(){
+		createItem();
+                createItem();
+                createEntity();
+                createEntity();
+                createEntity();
+                createEntity();
+		createStairs();
+	}
+	
 	//print the map
 	public void printMap(){
 		for(int i = 0; i < MAP_SIZE_X; i++){
@@ -211,7 +220,12 @@ public class Map{
                         	map[x][y] = 'P';
                         }
                         else if(entities.get(i).getIsItem()){
-                        	map[x][y] = '$';
+                        	if(entities.get(i).getIsStairs()){
+					map[x][y] = 'Z';
+				}
+				else{
+					map[x][y] = '$';
+				}
                        	}
                         else{
                         	if(entities.get(i).getAIMovement()){
@@ -247,7 +261,12 @@ public class Map{
 					map[x][y] = 'P';
 				}
 				else if(entities.get(i).getIsItem()){
-					map[x][y] = '$';
+					if(entities.get(i).getIsStairs()){
+						map[x][y] = 'Z';
+					}
+					else{
+						map[x][y] = '$';
+					}
 				}
 				else{
 					if(entities.get(i).getAIMovement()){
@@ -434,6 +453,33 @@ public class Map{
 		entityInv.add(genItem.generate());
 
 		//add to arraylist
+                entities.add(entity);
+	}
+
+	//this method creates the stairs
+	public void createStairs(){
+                Entity entity = new Entity();
+                boolean createCheck = false;
+                Random rand = new Random();
+                while(!createCheck){
+                        int x = rand.nextInt(MAP_SIZE_X);
+                        int y = rand.nextInt(MAP_SIZE_Y);
+                        if(map[x][y] == '.'){
+                                entity.setXCoor(x);
+                                entity.setYCoor(y);
+                                map[entity.getXCoor()][entity.getYCoor()] = 'Z';
+                                createCheck = true;
+                        }
+                }
+                entity.setIsItem(true);
+		entity.setIsStairs(true);
+
+                //add one item to it's inventory
+                Inventory entityInv = entity.getInventory();
+                ItemGenerator genItem = new ItemGenerator();
+                entityInv.add(genItem.generate());
+
+                //add to arraylist
                 entities.add(entity);
 	}
 
