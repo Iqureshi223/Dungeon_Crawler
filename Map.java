@@ -355,11 +355,51 @@ public class Map{
 		Inventory DInv = defender.getInventory();
 		if(attacker.getIsPlayer() && defender.getIsItem() && defender.getIsStairs()){
 			//this should allow the player to move up to the next floor
-			currentFloor++;
-			if(currentFloor > 3){
-				currentFloor = 1;
-			}
-			changeFloors();
+			System.out.print("Would you like to advance to the next floor? (Y/N): ");
+			Scanner input = new Scanner(System.in);
+                        String inString = input.next();
+
+                        //determine what kind of input
+                        switch(inString){
+                                case "Y":
+                                        currentFloor++;
+                        		if(currentFloor > 3){
+                                		currentFloor = 1;
+                        		}
+                        		changeFloors();
+					break;
+                                case "YES":
+                                        currentFloor++;
+                        		if(currentFloor > 3){
+                                		currentFloor = 1;
+                        		}
+                        		changeFloors();
+                                        break;
+                                case "y":
+                                        currentFloor++;
+                        		if(currentFloor > 3){
+                                		currentFloor = 1;
+                        		}
+                        		changeFloors();
+                                        break;
+                                case "yes":
+                                        currentFloor++;
+                        		if(currentFloor > 3){
+                                		currentFloor = 1;
+                        		}
+                        		changeFloors();
+                                        break;
+                                case "N":
+                                        break;
+                                case "NO":
+                                        break;
+                                case "n":
+                                        break;
+                                case "no":
+                                        break;
+                                default:
+                                        System.out.println("Bad input. Floor not changed.");
+                        }
 		}
 		else if(attacker.getIsPlayer() && defender.getIsItem() && !defender.getIsStairs()){
 			//this should activate the prompt for picking up items
