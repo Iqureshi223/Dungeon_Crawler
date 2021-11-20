@@ -19,6 +19,10 @@ PrintWriter pw;
 FileReader read;
 Scanner s;
 //constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
+public Input(){
+
+
+}
 public Input(Entity ent) {
 this.entity = ent;
 Terminal.rawMode();
