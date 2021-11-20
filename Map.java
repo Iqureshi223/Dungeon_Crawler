@@ -69,31 +69,75 @@ public class Map{
 	int numEnemy = 0;
 
 	public Map(){
-		//import a map from files
-		ImportMap();
+		boolean load = askLoad();
+		if(load){
+			loadMap();
+			loadEntities();
+		}
+		//false condition, creates a new game
+		else{
+			//import a map from files
+			ImportMap();
 
-		//fill in map
-		for(int i = 0; i < MAP_SIZE_X; i++){
-                        for(int j = 0; j < MAP_SIZE_Y; j++){
-                        	map[i][j] = importMap[i][j];
+			//fill in map
+			for(int i = 0; i < MAP_SIZE_X; i++){
+                        	for(int j = 0; j < MAP_SIZE_Y; j++){
+                        		map[i][j] = importMap[i][j];
+                		}
                 	}
-                }
 		
-		//create BAD entity
-		createEntity(); //this entity is for debug purposes, it should NOT appear on the map at any time
-		moveBAD();
+			//create BAD entity
+			createEntity(); //this entity is for debug purposes, it should NOT appear on the map at any time
+			moveBAD();
 		
-		//setup player
-		System.out.print("Please enter your name: ");
+			//setup player
+			System.out.print("Please enter your name: ");
+			Scanner input = new Scanner(System.in);
+			String playerName = input.next();
+			createPlayer(playerName);
+
+			//create non player items and entities
+			populate();
+
+			//setup map
+			firstMap();
+		}
+	}
+
+	//check if player wants to load the save file
+	public boolean askLoad(){
+		System.out.print("Would you like to load the save file? (Y/N): ");
 		Scanner input = new Scanner(System.in);
-		String playerName = input.next();
-		createPlayer(playerName);
+		String inString = input.next();
+		boolean result = false;
 
-		//create non player items and entities
-		populate();
+                //determine what kind of input
+                switch(inString){
+                	case "Y":
+                        	result = true;
+                                break;
+                        case "YES":
+                              	result = true;
+                                break;
+                        case "y":
+                                result = true;
+                                break;
+                        case "yes":
+                                result = true;
+                                break;
+                        case "N":
+                                break;
+                        case "NO":
+                                break;
+                        case "n":
+                                break;
+                        case "no":
+                                break;
+                        default:
+                                System.out.println("Bad input. Save file not loaded.");
+		}
 
-		//setup map
-		firstMap();
+		return result;		
 	}
 	
 	//populate the floor
@@ -776,8 +820,33 @@ public class Map{
 		populate();
 	}
 
+	//this saves all the entities to be loaded in later
+	public void saveEntities(){
+		Input input = new Input();
+		//this should pass the arraylist of entities and save them to files
+		//currently unfinished
+	}
 
-
+	//this loads all entities from
+	public void loadEntities(){
+		Input input = new Input();
+		//this should recieve an arraylist of entities and update the map arraylist
+		//currently uninished
+	}
+	
+	//save current map info
+	public void saveMap(){
+		Input input = new Input();
+		//this should save a single number to a file
+		//currently unfinished
+	}
+	
+	//load in saved map info
+	public void loadMap(){
+		Input input = new Input();
+		//this should read in a number from a file and change currentFloor and call ImportMap()
+		//currently unfinished
+	}
 
 
 
