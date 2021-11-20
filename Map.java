@@ -70,7 +70,7 @@ public class Map{
 
 	public Map(){
 		//import a map from files
-		ImportMap(currentFloor);
+		ImportMap();
 
 		//fill in map
 		for(int i = 0; i < MAP_SIZE_X; i++){
@@ -742,23 +742,36 @@ public class Map{
 	}
 	
 	//loads in a map from a text file
-	public void ImportMap(int floorNumber){
-		/*
+	public void ImportMap(){
 		try{
-			Input input = new Input()
+			Input input = new Input();
+			ArrayList<String> unassignedMap = input.getRoom(currentFloor);
+			importMap = new char[MAP_SIZE_X][MAP_SIZE_Y];
+			int sequence = 0;
+			for(int i = 0; i < MAP_SIZE_X; i++){
+				for(int j = 0; j < MAP_SIZE_Y; j++){
+					System.out.println("sequence: " + sequence); //test line
+					System.out.println("size: " + unassignedMap.size()); //test line
+					System.out.println("preconversion: " + unassignedMap.get(sequence)); //test line
+					char conversion = unassignedMap.get(sequence).charAt(0);
+					System.out.println(conversion); //test line
+					importMap[i][j] = conversion;
+					sequence++;
+				}
+			}
 		}
 		catch(Exception e){
 			importMap = DEFAULT_MAP;
+			System.out.println("Error in map loading, default map selected.");
 		}
-		*/
 
-		importMap = DEFAULT_MAP; //remove in final version
+		//importMap = DEFAULT_MAP; //remove in final version
 	}
 
 	//change floors
 	public void changeFloors(){
 		depopulate();
-		ImportMap(currentFloor);
+		ImportMap();
 		movePlayer();
 		populate();
 	}
