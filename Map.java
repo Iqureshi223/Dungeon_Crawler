@@ -842,7 +842,7 @@ public class Map{
 	public void loadEntities(){
 		//this should recieve an arraylist of entities and update the map arraylist
 		Input input = new Input();
-		entitites = input.loadEntity();
+		entities = input.loadEntity();
 		firstMap();
 		//currently uninished
 	}
