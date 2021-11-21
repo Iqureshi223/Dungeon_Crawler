@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Input {
@@ -164,10 +165,14 @@ public ArrayList<String> getRoom(int roomNumber) {
 				room.add(a);
 			}
 		}
+		s.close();
+		read.close();
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
+	}catch(IOException ex) {
+		ex.printStackTrace();
 	}
-	s.close();
+	
  	return room;
 	
 }
