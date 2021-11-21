@@ -1,7 +1,6 @@
 //library created by the professmor to allow inputs without hitting enter
 import ansi_terminal.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.File;
@@ -214,12 +213,30 @@ public void save(ArrayList<Entity> entityList, int floor) {
 		System.out.println("File not found! failed to save");
 	}
 }
-public void loadEntity() {
+public ArrayList<Entity> loadEntity() {
+	try{
+		read = new FileReader("Entities.txt");
+		s = new Scanner(read);
+		while(s.hasNextLine()) {
+			entity = s.nextLine();
+			entities.add(entity);
 
+		}
+	}catch (FileNotFoundException e){
+		System.out.println("File not found! failed to load");
+	}
+		
 
 }
-public void loadFloor() {
-
+public int loadFloor() {
+	try{
+		s = new Scanner(new File("floor.txt"));
+		while(s.hasNextLine()) {
+			floorNumber = s.nextInt();
+		}
+	}catch (FileNotFoundException e) {
+		System.out.println("File not found! failed to load");
+	}
 }
 }
 
