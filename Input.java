@@ -15,6 +15,7 @@ private Key key;
 private int movement = 0;
 private boolean run = true;
 ArrayList<String>room;
+ArrayList<Item> Items = new ArrayList<Item>();
 ArrayList<Entity> entities;
 int floorNumber = 0; 
 PrintWriter pw;
@@ -194,10 +195,6 @@ public ArrayList<String> getRoom(int roomNumber) {
  	return room;
 	
 }
-public void InventorySimpler() {
-	
-
-}
 public void save(ArrayList<Entity> entityList, int floor) {
 	this.entities = entityList;
 	this.floorNumber = floor;
@@ -207,11 +204,18 @@ public void save(ArrayList<Entity> entityList, int floor) {
 				pw.println(ent.getIsPlayer());
 				pw.println(ent.getHealth());
 				pw.println(ent.getName());
+				Items  = ent.getInventory().getItems();
+				for(int j = 0; j < Items.size(); j++) {
+				Item tempItem = Items.get(j);
+				String ItemType = "";
+					
+				}
 				pw.println(ent.getXCoor());
 				pw.println(ent.getYCoor());
 				pw.println(ent.getIsItem());
-				pw.println(ent.getIsStairs();
+				pw.println(ent.getIsStairs());
 				pw.println(ent.getAIMovement());
+				pw.close();
 		}
 				
 	
@@ -221,6 +225,7 @@ public void save(ArrayList<Entity> entityList, int floor) {
 	try{
 		pw = new PrintWriter(new File("floor.txt"));
 		pw.println(floorNumber);
+		pw.close();
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to save");
 	}
@@ -229,26 +234,35 @@ public ArrayList<Entity> loadEntity() {
 	try{
 		read = new FileReader("Entities.txt");
 		s = new Scanner(read);
-		while(s.hasNextLine()) {
-			entity = s.nextLine();
-			entities.add(entity);
+		//while(s.hasNextLine()) {
+			//entity = s.nextLine();
+			//entities.add(entity);
 
-		}
+		//}
+		read.close();
+		s.close();
 	}catch (FileNotFoundException e){
 		System.out.println("File not found! failed to load");
+	}catch(IOException ex) {
+		ex.printStackTrace();
 	}
-		
+	return entities;	
 
 }
 public int loadFloor() {
 	try{
-		s = new Scanner(new File("floor.txt"));
+		read = new FileReader("floor.txt");
+		s = new Scanner(read);
 		while(s.hasNextLine()) {
 			floorNumber = s.nextInt();
 		}
+		s.close();
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to load");
+	}catch (IOException ex) {
+		ex.printStackTrace();
 	}
+	return floorNumber;
 }
 }
 
