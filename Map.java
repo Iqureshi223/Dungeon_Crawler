@@ -77,7 +77,7 @@ public class Map{
 		//false condition, creates a new game
 		else{
 			//import a map from files
-			System.out.println(currentFloor); //test line
+			//System.out.println(currentFloor); //test line
 			ImportMap();
 
 			//fill in map
@@ -802,7 +802,7 @@ public class Map{
 			System.out.println(1); //test line
 			Input input = new Input();
 			System.out.println(2); //test line
-			System.out.println(currentFloor); //test line
+			//System.out.println(currentFloor); //test line
 			ArrayList<String> unassignedMap = input.getRoom(currentFloor);
 			System.out.println(3); //test line
 			importMap = new char[MAP_SIZE_X][MAP_SIZE_Y];
