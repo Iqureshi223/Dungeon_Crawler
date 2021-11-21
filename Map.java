@@ -842,6 +842,8 @@ public class Map{
 	public void loadEntities(){
 		//this should recieve an arraylist of entities and update the map arraylist
 		Input input = new Input();
+		entitites = input.loadEntity();
+		firstMap();
 		//currently uninished
 	}
 		
@@ -849,6 +851,8 @@ public class Map{
 	public void loadMap(){
 		//this should read in a number from a file and change currentFloor and call ImportMap()
 		Input input = new Input();
+		currentFloor = input.loadFloor();
+		ImportMap();
 		//currently unfinished
 	}
 
