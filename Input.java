@@ -117,19 +117,15 @@ while(run) {
 			break;
 		case S:
 			movement = 6;
-			save();
 			break;
 		case s:
 			movement = 6;
-			save();
 			break;
 		case L:
 			movement = 7;
-			load();
 			break;
 		case l:
 			movement = 7;
-			load();
 			break;
 		case R:
 			run = false;
