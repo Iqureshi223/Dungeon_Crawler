@@ -646,6 +646,16 @@ public class Map{
 				case 5:
 					//System.out.println("returned 5");
 					break;
+				//saving the game
+				case 6:
+					saveMap();
+					saveEntities();
+					break;
+				//player loading the save file
+				case 7:
+					loadMap();
+					loadEntities();
+					break;
 				//other/bug handling
 				default:
 					System.out.println("Error in player movement switch case.");
