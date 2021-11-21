@@ -185,9 +185,9 @@ public ArrayList<String> getRoom(int roomNumber) {
 			for(String a: lines) {	
 				room.add(a);
 			}
+		}
 		s.close();
 		reader.close();
-		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
 	}catch(IOException ex) {
