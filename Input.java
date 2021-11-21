@@ -16,7 +16,9 @@ private int movement = 0;
 private boolean run = true;
 ArrayList<Item> Items = new ArrayList<Item>();
 ArrayList<Entity> entities;
-int floorNumber = 0; 
+int floorNumber = 0;
+FileReader reader;
+Scanner s; 
 //constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
 public Input(){
 
@@ -172,37 +174,28 @@ public void defaultTerminal() {
 
 public ArrayList<String> getRoom(int roomNumber) {
 	ArrayList<String> room = new ArrayList<String>();
+	Scanner s;
+	
 	try{
-		FileReader read = new FileReader("map" + roomNumber +".txt");
-		System.out.println("the first error");
-		Scanner s = new Scanner(read);
-		System.out.println("The second error");
+		 reader = new FileReader("map" + roomNumber +".txt");
+	
+		 s = new Scanner(reader);
 		while(s.hasNextLine()) {
-			System.out.println("the third error");
 			String[] lines = s.nextLine().split(",");
-			System.out.println("the fourth error");
 			for(String a: lines) {	
-				System.out.println("the fifth error");
 				room.add(a);
-				System.out.println("the seventh");
 			}
-		read.close();
-		System.out.println("the 8");
 		s.close();
-		System.out.println("the 9");
+		reader.close();
 		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
-		System.out.println("the 10");
 	}catch(IOException ex) {
 		ex.printStackTrace();
-		System.out.println("the 11");
 	}catch(Exception e) {
 		System.out.println("this is the all error");
-		System.out.println("the 12");
 	}
 	System.out.println(room);
-	System.out.println("the 13");	
  	return room;
 	}
 public void save(ArrayList<Entity> entityList, int floor) {
@@ -242,15 +235,15 @@ public void save(ArrayList<Entity> entityList, int floor) {
 }
 public ArrayList<Entity> loadEntity() {
 	try{
-		FileReader read = new FileReader("Entities.txt");
-		Scanner s = new Scanner(read);
+		 reader = new FileReader("Entities.txt");
+		s = new Scanner(reader);
 		//while(s.hasNextLine()) {
 			//entity = s.nextLine();
 			//entities.add(entity);
 
 		//}
-		read.close();
 		s.close();
+		reader.close();
 	}catch (FileNotFoundException e){
 		System.out.println("File not found! failed to load");
 	}catch(IOException ex) {
@@ -261,14 +254,17 @@ public ArrayList<Entity> loadEntity() {
 }
 public int loadFloor() {
 	try{
-		FileReader read = new FileReader("floor.txt");
-		Scanner s = new Scanner(read);
+		 reader = new FileReader("floor.txt");
+		 s = new Scanner(reader);
 		while(s.hasNextLine()) {
 			floorNumber = s.nextInt();
 		}
 		s.close();
+		reader.close();
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to load");
+	}catch(IOException ex) {
+		ex.printStackTrace();
 	}
 	System.out.println(floorNumber);
 	return floorNumber;
