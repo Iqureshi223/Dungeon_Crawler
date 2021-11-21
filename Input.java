@@ -203,26 +203,15 @@ public void save(ArrayList<Entity> entityList, int floor) {
 	this.floorNumber = floor;
 	try{
 		pw = new PrintWriter(new File("Entities.txt"));
-		for(Entity entity: entities) {
-			if(entity.getIsPlayer() == true) {
-				pw.println(entity.getIsPlayer());
-				pw.println(entity.getName());
-				pw.println(entity.getXCoor());
-				pw.println(entity.getYCoor());
-				pw.println(entity.getHealth());
-			}else{
-				pw.println(entity.getName());
-				pw.println(entity.getXCoor());
-				pw.println(entity.getYCoor());
-				if(entity.getIsItem() == true){
-					if(entity.getIsStairs() == true) {
-						pw.println(entity.getIsStairs());
-					}
-				}else{
-					pw.println(entity.getHealth());
-					pw.println(entity.getAIMovement());
-				}	
-			}
+		for(Entity ent: entities) {
+				pw.println(ent.getIsPlayer());
+				pw.println(ent.getHealth());
+				pw.println(ent.getName());
+				pw.println(ent.getXCoor());
+				pw.println(ent.getYCoor());
+				pw.println(ent.getIsItem());
+				pw.println(ent.getIsStairs();
+				pw.println(ent.getAIMovement());
 		}
 				
 	
