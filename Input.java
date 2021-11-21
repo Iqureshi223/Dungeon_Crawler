@@ -154,16 +154,15 @@ public void defaultTerminal() {
 	Terminal.cookedMode();
 }
 public ArrayList<String> getRoom(int roomNumber) {
-	int i = 0;
 	room = new ArrayList<String>();
 	try{
 		read = new FileReader("map" + roomNumber +".txt");
 		s = new Scanner(read);
 		while(s.hasNextLine()) {
 			String[] lines = s.nextLine().split(",");
-			String line = lines[i];
-			room.add(line);
-			i = i + 1;
+			for(String a: lines) {	
+				room.add(a);
+			}
 		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
