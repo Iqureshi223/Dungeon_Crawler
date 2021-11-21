@@ -170,6 +170,7 @@ public void help() {
 public void defaultTerminal() {
 	Terminal.cookedMode();
 }
+
 public ArrayList<String> getRoom(int roomNumber) {
 	room = new ArrayList<String>();
 	try{
@@ -188,7 +189,7 @@ public ArrayList<String> getRoom(int roomNumber) {
 	}catch(IOException ex) {
 		ex.printStackTrace();
 	}
-	
+	System.out.println(room);	
  	return room;
 	
 }
@@ -257,6 +258,7 @@ public int loadFloor() {
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to load");
 	}
+	System.out.println(floorNumber);
 	return floorNumber;
 }
 }
