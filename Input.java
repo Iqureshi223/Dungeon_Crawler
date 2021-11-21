@@ -194,14 +194,37 @@ public ArrayList<String> getRoom(int roomNumber) {
  	return room;
 	
 }
+public void InventorySimpler() {
+	
+
+}
 public void save(ArrayList<Entity> entityList, int floor) {
 	this.entities = entityList;
 	this.floorNumber = floor;
 	try{
 		pw = new PrintWriter(new File("Entities.txt"));
 		for(Entity entity: entities) {
-			pw.println(entity);
-		}	
+			if(entity.getIsPlayer() == true) {
+				pw.println(entity.getIsPlayer());
+				pw.println(entity.getName());
+				pw.println(entity.getXCoor());
+				pw.println(entity.getYCoor());
+				pw.println(entity.getHealth());
+			}else{
+				pw.println(entity.getName());
+				pw.println(entity.getXCoor());
+				pw.println(entity.getYCoor());
+				if(entity.getIsItem() == true){
+					if(entity.getIsStairs() == true) {
+						pw.println(entity.getIsStairs());
+					}
+				}else{
+					pw.println(entity.getHealth());
+					pw.println(entity.getAIMovement());
+				}	
+			}
+		}
+				
 	
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to save");
