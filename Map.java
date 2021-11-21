@@ -72,6 +72,7 @@ public class Map{
 		if(load){
 			loadMap();
 			loadEntities();
+			firstMap();
 		}
 		//false condition, creates a new game
 		else{
@@ -654,6 +655,7 @@ public class Map{
 				case 7:
 					loadMap();
 					loadEntities();
+					firstMap();
 					break;
 				//other/bug handling
 				default:
@@ -843,7 +845,6 @@ public class Map{
 		//this should recieve an arraylist of entities and update the map arraylist
 		Input input = new Input();
 		entities = input.loadEntity();
-		firstMap();
 		//currently uninished
 	}
 		
