@@ -799,14 +799,14 @@ public class Map{
 	//loads in a map from a text file
 	public void ImportMap(){
 		try{
-			System.out.println(1); //test line
+			//System.out.println(1); //test line
 			Input input = new Input();
-			System.out.println(2); //test line
+			//System.out.println(2); //test line
 			//System.out.println(currentFloor); //test line
 			ArrayList<String> unassignedMap = input.getRoom(currentFloor);
-			System.out.println(3); //test line
+			//System.out.println(3); //test line
 			importMap = new char[MAP_SIZE_X][MAP_SIZE_Y];
-			System.out.println(4); //test line
+			//System.out.println(4); //test line
 			int sequence = 0;
 			for(int i = 0; i < MAP_SIZE_X; i++){
 				for(int j = 0; j < MAP_SIZE_Y; j++){
