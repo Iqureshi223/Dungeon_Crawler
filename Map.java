@@ -71,7 +71,7 @@ public class Map{
 		boolean load = askLoad();
 		if(load){
 			loadMap();
-			//loadEntities();
+			loadEntities();
 			firstMap();
 		}
 		//false condition, creates a new game
@@ -655,7 +655,7 @@ public class Map{
 				//player loading the save file
 				case 7:
 					loadMap();
-					//loadEntities();
+					loadEntities();
 					firstMap();
 					break;
 				//other/bug handling
