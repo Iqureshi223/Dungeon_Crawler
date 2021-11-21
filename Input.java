@@ -49,12 +49,12 @@ switch(key) {
 		movement = 4;
 		break;
 	case I:
-		openInventory();
 		movement = 5;
+		openInventory();
 		break;
 	case i:
-		openInventory();
 		movement = 5;
+		openInventory();
 		break;
 	case H:
 		help();
@@ -78,6 +78,8 @@ while(run) {
 	System.out.println("Y. Drop item");
 	System.out.println("Z. Equip Weapon");
 	System.out.println("Q. Equip Armor");
+	System.out.println("S. Save Game");
+	System.out.println("L. Load Game");
 	System.out.println("R. Exit");
 	System.out.println("ESCAPE. quit the game");
 
@@ -112,6 +114,22 @@ while(run) {
 			break;
 		case q:
 			entity.getInventory().equipArmor();
+			break;
+		case S:
+			movement = 6;
+			save();
+			break;
+		case s:
+			movement = 6;
+			save();
+			break;
+		case L:
+			movement = 7;
+			load();
+			break;
+		case l:
+			movement = 7;
+			load();
 			break;
 		case R:
 			run = false;
@@ -164,9 +182,9 @@ public ArrayList<String> getRoom(int roomNumber) {
 			for(String a: lines) {	
 				room.add(a);
 			}
-		}
 		s.close();
 		read.close();
+		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
 	}catch(IOException ex) {
@@ -176,7 +194,7 @@ public ArrayList<String> getRoom(int roomNumber) {
  	return room;
 	
 }
-public void store() {
+public void save() {
 	try{
 		pw = new PrintWriter(new File("Player.txt"));
 		pw.println(entity);
@@ -186,6 +204,9 @@ public void store() {
 		return;
 	}
 }
-}
+public void load() {
 
+
+}
+}
 
