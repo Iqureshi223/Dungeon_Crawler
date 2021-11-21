@@ -14,7 +14,7 @@ private Entity entity;
 private Key key;
 private int movement = 0;
 private boolean run = true;
-ArrayList<String>room = new ArrayList<String>(); 
+ArrayList<String>room; 
 PrintWriter pw;
 FileReader read;
 Scanner s;
@@ -155,17 +155,20 @@ public void defaultTerminal() {
 }
 public ArrayList<String> getRoom(int roomNumber) {
 	int i = 0;
+	room = new ArrayList<String>();
 	try{
 		read = new FileReader("map" + roomNumber +".txt");
 		s = new Scanner(read);
 		while(s.hasNextLine()) {
 			String[] lines = s.nextLine().split(",");
 			String line = lines[i];
+			room.add(line);
 			i = i + 1;
 		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
 	}
+	System.out.println(room);
  	return room;
 	
 }
