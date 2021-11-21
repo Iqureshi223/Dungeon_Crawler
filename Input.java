@@ -259,8 +259,6 @@ public int loadFloor() {
 		s.close();
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to load");
-	}catch (IOException ex) {
-		ex.printStackTrace();
 	}
 	return floorNumber;
 }
