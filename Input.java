@@ -167,7 +167,7 @@ public ArrayList<String> getRoom(int roomNumber) {
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
 	}
-	System.out.println(room);
+	s.close();
  	return room;
 	
 }
