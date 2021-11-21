@@ -14,7 +14,6 @@ private Entity entity;
 private Key key;
 private int movement = 0;
 private boolean run = true;
-ArrayList<String>room;
 ArrayList<Item> Items = new ArrayList<Item>();
 ArrayList<Entity> entities;
 int floorNumber = 0; 
@@ -172,29 +171,40 @@ public void defaultTerminal() {
 }
 
 public ArrayList<String> getRoom(int roomNumber) {
-	room = new ArrayList<String>();
+	ArrayList<String> room = new ArrayList<String>();
 	try{
 		FileReader read = new FileReader("map" + roomNumber +".txt");
+		System.out.println("the first error");
 		Scanner s = new Scanner(read);
+		System.out.println("The second error");
 		while(s.hasNextLine()) {
+			System.out.println("the third error");
 			String[] lines = s.nextLine().split(",");
+			System.out.println("the fourth error");
 			for(String a: lines) {	
+				System.out.println("the fifth error");
 				room.add(a);
+				System.out.println("the seventh");
 			}
 		read.close();
+		System.out.println("the 8");
 		s.close();
+		System.out.println("the 9");
 		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
+		System.out.println("the 10");
 	}catch(IOException ex) {
 		ex.printStackTrace();
+		System.out.println("the 11");
 	}catch(Exception e) {
 		System.out.println("this is the all error");
+		System.out.println("the 12");
 	}
-	System.out.println(room);	
+	System.out.println(room);
+	System.out.println("the 13");	
  	return room;
-	
-}
+	}
 public void save(ArrayList<Entity> entityList, int floor) {
 	this.entities = entityList;
 	this.floorNumber = floor;
