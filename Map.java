@@ -648,8 +648,7 @@ public class Map{
 					break;
 				//saving the game
 				case 6:
-					saveMap();
-					saveEntities();
+					save();
 					break;
 				//player loading the save file
 				case 7:
@@ -833,30 +832,23 @@ public class Map{
 	}
 
 	//this saves all the entities to be loaded in later
-	public void saveEntities(){
+	public void save(){
+		//this should pass the arraylist of entities and save them to files, also passes in the floor number
 		Input input = new Input();
-		//this should pass the arraylist of entities and save them to files
-		//currently unfinished
+		input.save(entities, currentFloor);
 	}
 
 	//this loads all entities from
 	public void loadEntities(){
-		Input input = new Input();
 		//this should recieve an arraylist of entities and update the map arraylist
+		Input input = new Input();
 		//currently uninished
 	}
-	
-	//save current map info
-	public void saveMap(){
-		Input input = new Input();
-		//this should save a single number to a file
-		//currently unfinished
-	}
-	
+		
 	//load in saved map info
 	public void loadMap(){
-		Input input = new Input();
 		//this should read in a number from a file and change currentFloor and call ImportMap()
+		Input input = new Input();
 		//currently unfinished
 	}
 
