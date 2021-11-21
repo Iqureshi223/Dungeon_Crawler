@@ -181,13 +181,15 @@ public ArrayList<String> getRoom(int roomNumber) {
 			for(String a: lines) {	
 				room.add(a);
 			}
-		s.close();
 		read.close();
+		s.close();
 		}
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
 	}catch(IOException ex) {
 		ex.printStackTrace();
+	}catch(Exception e) {
+		System.out.println("this is the all error");
 	}
 	System.out.println(room);	
  	return room;
