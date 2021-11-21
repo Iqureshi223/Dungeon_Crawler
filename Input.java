@@ -18,9 +18,6 @@ ArrayList<String>room;
 ArrayList<Item> Items = new ArrayList<Item>();
 ArrayList<Entity> entities;
 int floorNumber = 0; 
-PrintWriter pw;
-FileReader read;
-Scanner s;
 //constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
 public Input(){
 
@@ -176,8 +173,8 @@ public void defaultTerminal() {
 public ArrayList<String> getRoom(int roomNumber) {
 	room = new ArrayList<String>();
 	try{
-		read = new FileReader("map" + roomNumber +".txt");
-		s = new Scanner(read);
+		FileReader read = new FileReader("map" + roomNumber +".txt");
+		Scanner s = new Scanner(read);
 		while(s.hasNextLine()) {
 			String[] lines = s.nextLine().split(",");
 			for(String a: lines) {	
@@ -199,7 +196,7 @@ public void save(ArrayList<Entity> entityList, int floor) {
 	this.entities = entityList;
 	this.floorNumber = floor;
 	try{
-		pw = new PrintWriter(new File("Entities.txt"));
+		PrintWriter pw = new PrintWriter(new File("Entities.txt"));
 		for(Entity ent: entities) {
 				pw.println(ent.getIsPlayer());
 				pw.println(ent.getHealth());
@@ -223,7 +220,7 @@ public void save(ArrayList<Entity> entityList, int floor) {
 		System.out.println("File not found! failed to save");
 	}
 	try{
-		pw = new PrintWriter(new File("floor.txt"));
+		PrintWriter pw = new PrintWriter(new File("floor.txt"));
 		pw.println(floorNumber);
 		pw.close();
 	}catch (FileNotFoundException e) {
@@ -232,8 +229,8 @@ public void save(ArrayList<Entity> entityList, int floor) {
 }
 public ArrayList<Entity> loadEntity() {
 	try{
-		read = new FileReader("Entities.txt");
-		s = new Scanner(read);
+		FileReader read = new FileReader("Entities.txt");
+		Scanner s = new Scanner(read);
 		//while(s.hasNextLine()) {
 			//entity = s.nextLine();
 			//entities.add(entity);
@@ -251,8 +248,8 @@ public ArrayList<Entity> loadEntity() {
 }
 public int loadFloor() {
 	try{
-		read = new FileReader("floor.txt");
-		s = new Scanner(read);
+		FileReader read = new FileReader("floor.txt");
+		Scanner s = new Scanner(read);
 		while(s.hasNextLine()) {
 			floorNumber = s.nextInt();
 		}
