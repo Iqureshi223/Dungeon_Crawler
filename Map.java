@@ -41,8 +41,7 @@ public class Map{
 
 	final int MAP_SIZE_X= 20;
 	final int MAP_SIZE_Y = 20;
-	private char[][] map = new char[MAP_SIZE_X][MAP_SIZE_Y] ;
-	
+	private char[][] map = new char[MAP_SIZE_X][MAP_SIZE_Y];
 	private char[][] importMap;	
 	
 	int currentFloor = 1;
@@ -794,11 +793,11 @@ public class Map{
 			int sequence = 0;
 			for(int i = 0; i < MAP_SIZE_X; i++){
 				for(int j = 0; j < MAP_SIZE_Y; j++){
-					System.out.println("sequence: " + sequence); //test line
-					System.out.println("size: " + unassignedMap.size()); //test line
-					System.out.println("preconversion: " + unassignedMap.get(sequence)); //test line
+					//System.out.println("sequence: " + sequence); //test line
+					//System.out.println("size: " + unassignedMap.size()); //test line
+					//System.out.println("preconversion: " + unassignedMap.get(sequence)); //test line
 					char conversion = unassignedMap.get(sequence).charAt(0);
-					System.out.println(conversion); //test line
+					//System.out.println(conversion); //test line
 					importMap[i][j] = conversion;
 					sequence++;
 				}
