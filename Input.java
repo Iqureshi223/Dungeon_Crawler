@@ -16,7 +16,7 @@ private Key key;
 private int movement = 0;
 private boolean run = true;
 ArrayList<String>room;
-ArrayList<Entity> entities = new ArrayList<Entity>();
+ArrayList<Entity> entities;
 int floorNumber = 0; 
 PrintWriter pw;
 FileReader read;
@@ -195,17 +195,30 @@ public ArrayList<String> getRoom(int roomNumber) {
  	return room;
 	
 }
-public void save(ArrayList<Entity> entities, int floor) {
+public void save(ArrayList<Entity> entityList, int floor) {
+	this.entities = entityList;
+	this.floorNumber = floor;
 	try{
-		pw = new PrintWriter(new File("Player.txt"));
-		pw.println(entity);
-		pw.close();
+		pw = new PrintWriter(new File("Entities.txt"));
+		for(Entity entity: entities) {
+			pw.println(entity);
+		}	
+	
 	}catch (FileNotFoundException e) {
-		
+		System.out.println("File not found! failed to save");
+	}
+	try{
+		pw = new PrintWriter(new File("floor.txt"));
+		pw.println(floorNumber);
+	}catch (FileNotFoundException e) {
+		System.out.println("File not found! failed to save");
 	}
 }
-public void load() {
+public void loadEntity() {
 
+
+}
+public void loadFloor() {
 
 }
 }
