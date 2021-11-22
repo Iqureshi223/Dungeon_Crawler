@@ -240,11 +240,11 @@ public ArrayList<Entity> loadEntity() {
 	try{
 		reader = new FileReader("Entities.txt");
 		s = new Scanner(reader);
-		while(s.hasNextLine()) {
-			Entity listEntity;
-			listEntity.getIsPlayer().;
+	//	while(s.hasNextLine()) {
+	//		Entity listEntity;
+	//		listEntity.getIsPlayer().setIsPlayer();
 
-		}
+	//	}
 		s.close();
 		reader.close();
 	}catch (FileNotFoundException e){
@@ -260,7 +260,8 @@ public int loadFloor() {
 		 reader = new FileReader("floor.txt");
 		 s = new Scanner(reader);
 		while(s.hasNextLine()) {
-			floorNumber = s.nextInt();
+			String number = s.nextLine();
+			floorNumber = Integer.parseInt(number);
 		}
 		s.close();
 		reader.close();
