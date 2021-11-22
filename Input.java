@@ -195,7 +195,6 @@ public ArrayList<String> getRoom(int roomNumber) {
 	}catch(Exception e) {
 		System.out.println("this is the all error");
 	}
-	System.out.println(room);
  	return room;
 	}
 public void save(ArrayList<Entity> entityList, int floor) {
