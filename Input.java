@@ -78,8 +78,8 @@ while(run) {
 	System.out.println("Y. Drop item");
 	System.out.println("Z. Equip Weapon");
 	System.out.println("Q. Equip Armor");
-	System.out.println("S. Save Game");
-	System.out.println("L. Load Game");
+	System.out.println("S. Save Game (EFFECT DOESN'T TAKE PLACE UNTIL EXITING MENU)");
+	System.out.println("L. Load Game (EFFECT DOESN'T TAKE PLACE UNTIL EXITING MENU)");
 	System.out.println("R. Exit");
 	System.out.println("ESCAPE. quit the game");
 
@@ -210,9 +210,12 @@ public void save(ArrayList<Entity> entityList, int floor) {
 				pw.println(ent.getName());
 				Items  = ent.getInventory().getItems();
 				for(int j = 0; j < Items.size(); j++) {
-				Item tempItem = Items.get(j);
-				String ItemType = "";
-					
+					Item tempItem = Items.get(j);
+					pw.println(tempItem.getWeight());
+					pw.println(tempItem.getValue());
+					pw.println(tempItem.getName());
+					pw.println(tempItem.getType());
+					pw.println(tempItem.getStrength());
 				}
 				pw.println(ent.getXCoor());
 				pw.println(ent.getYCoor());
@@ -221,8 +224,6 @@ public void save(ArrayList<Entity> entityList, int floor) {
 				pw.println(ent.getAIMovement());
 				pw.close();
 		}
-				
-	
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to save");
 	}
@@ -235,14 +236,15 @@ public void save(ArrayList<Entity> entityList, int floor) {
 	}
 }
 public ArrayList<Entity> loadEntity() {
+	entities = new ArrayList<Entity>();
 	try{
-		 reader = new FileReader("Entities.txt");
+		reader = new FileReader("Entities.txt");
 		s = new Scanner(reader);
-		//while(s.hasNextLine()) {
-			//entity = s.nextLine();
-			//entities.add(entity);
+		while(s.hasNextLine()) {
+			Entity listEntity;
+			listEntity.getIsPlayer;
 
-		//}
+		}
 		s.close();
 		reader.close();
 	}catch (FileNotFoundException e){
