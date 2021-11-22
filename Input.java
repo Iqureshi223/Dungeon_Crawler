@@ -160,6 +160,8 @@ public void help() {
 	System.out.println("A: is an aggressive enemy that hunts the player down");
 	System.out.println("D: is a passive enemy that roams the dungeon");
 	System.out.println("$: is an item for the player to pick up");
+	System.out.println("Z: is a staircase to advance to the next floor");
+	System.out.println("Enter: to continue and confirm inventory choices");
 	System.out.println("Z: staircase to advance to next floor");
 	System.out.println("S: Save your current game");
 	System.out.println("L: Load a previously saved game");
