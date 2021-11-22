@@ -206,9 +206,14 @@ public void save(ArrayList<Entity> entityList, int floor) {
 		PrintWriter pw = new PrintWriter(new File("Entities.txt"));
 		for(Entity ent: entities) {
 				pw.println(ent.getIsPlayer());
+				pw.println(ent.getIsItem());
 				pw.println(ent.getHealth());
 				pw.println(ent.getName());
-				Items  = ent.getInventory().getItems();
+				pw.println(ent.getXCoor());
+				pw.println(ent.getYCoor());
+				pw.println(ent.getIsStairs());
+				pw.println(ent.getAIMovement());
+				Items = ent.getInventory().getItems();
 				for(int j = 0; j < Items.size(); j++) {
 					Item tempItem = Items.get(j);
 					pw.println(tempItem.getWeight());
@@ -217,11 +222,6 @@ public void save(ArrayList<Entity> entityList, int floor) {
 					pw.println(tempItem.getType());
 					pw.println(tempItem.getStrength());
 				}
-				pw.println(ent.getXCoor());
-				pw.println(ent.getYCoor());
-				pw.println(ent.getIsItem());
-				pw.println(ent.getIsStairs());
-				pw.println(ent.getAIMovement());
 				pw.close();
 		}
 	}catch (FileNotFoundException e) {
@@ -240,11 +240,11 @@ public ArrayList<Entity> loadEntity() {
 	try{
 		reader = new FileReader("Entities.txt");
 		s = new Scanner(reader);
-	//	while(s.hasNextLine()) {
-	//		Entity listEntity;
-	//		listEntity.getIsPlayer().setIsPlayer();
+		while(s.hasNextLine()) {
+		//	Entity listEntity;
+		//	listEntity.getIsPlayer().setIsPlayer(s.hasNextLine());
 
-	//	}
+		}
 		s.close();
 		reader.close();
 	}catch (FileNotFoundException e){
