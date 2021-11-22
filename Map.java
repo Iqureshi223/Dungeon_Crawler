@@ -41,8 +41,7 @@ public class Map{
 
 	final int MAP_SIZE_X= 20;
 	final int MAP_SIZE_Y = 20;
-	private char[][] map = new char[MAP_SIZE_X][MAP_SIZE_Y] ;
-	
+	private char[][] map = new char[MAP_SIZE_X][MAP_SIZE_Y];
 	private char[][] importMap;	
 	
 	int currentFloor = 1;
@@ -73,10 +72,12 @@ public class Map{
 		if(load){
 			loadMap();
 			loadEntities();
+			firstMap();
 		}
 		//false condition, creates a new game
 		else{
 			//import a map from files
+			//System.out.println(currentFloor); //test line
 			ImportMap();
 
 			//fill in map
@@ -647,6 +648,16 @@ public class Map{
 				case 5:
 					//System.out.println("returned 5");
 					break;
+				//saving the game
+				case 6:
+					save();
+					break;
+				//player loading the save file
+				case 7:
+					loadMap();
+					loadEntities();
+					firstMap();
+					break;
 				//other/bug handling
 				default:
 					System.out.println("Error in player movement switch case.");
@@ -788,20 +799,25 @@ public class Map{
 	//loads in a map from a text file
 	public void ImportMap(){
 		try{
+			//System.out.println(1); //test line
 			Input input = new Input();
+			//System.out.println(2); //test line
+			//System.out.println(currentFloor); //test line
 			ArrayList<String> unassignedMap = input.getRoom(currentFloor);
+			//System.out.println(3); //test line
 			importMap = new char[MAP_SIZE_X][MAP_SIZE_Y];
+			//System.out.println(4); //test line
 			int sequence = 0;
 			for(int i = 0; i < MAP_SIZE_X; i++){
 				for(int j = 0; j < MAP_SIZE_Y; j++){
-					System.out.println("sequence: " + sequence); //test line
-					System.out.println("size: " + unassignedMap.size()); //test line
-					System.out.println("preconversion: " + unassignedMap.get(sequence)); //test line
-					char conversion = unassignedMap.get(sequence).charAt(0);
-					System.out.println(conversion); //test line
+					//System.out.println(sequence); //test line
+					//System.out.println(unassignedMap.get(sequence)); //test line
+					char conversion = unassignedMap.get(sequence).charAt(1);
 					importMap[i][j] = conversion;
 					sequence++;
+					//System.out.print(importMap[i][j]); //test line
 				}
+				//System.out.print("\n");
 			}
 		}
 		catch(Exception e){
@@ -816,35 +832,36 @@ public class Map{
 	public void changeFloors(){
 		depopulate();
 		ImportMap();
+		for(int i = 0; i < MAP_SIZE_X; i++){
+                	for(int j = 0; j < MAP_SIZE_Y; j++){
+                        	map[i][j] = importMap[i][j];
+                        }
+                }
 		movePlayer();
 		populate();
 	}
 
 	//this saves all the entities to be loaded in later
-	public void saveEntities(){
+	public void save(){
+		//this should pass the arraylist of entities and save them to files, also passes in the floor number
 		Input input = new Input();
-		//this should pass the arraylist of entities and save them to files
-		//currently unfinished
+		input.save(entities, currentFloor);
 	}
 
 	//this loads all entities from
 	public void loadEntities(){
-		Input input = new Input();
 		//this should recieve an arraylist of entities and update the map arraylist
+		Input input = new Input();
+		entities = input.loadEntity();
 		//currently uninished
 	}
-	
-	//save current map info
-	public void saveMap(){
-		Input input = new Input();
-		//this should save a single number to a file
-		//currently unfinished
-	}
-	
+		
 	//load in saved map info
 	public void loadMap(){
-		Input input = new Input();
 		//this should read in a number from a file and change currentFloor and call ImportMap()
+		Input input = new Input();
+		currentFloor = input.loadFloor();
+		ImportMap();
 		//currently unfinished
 	}
 

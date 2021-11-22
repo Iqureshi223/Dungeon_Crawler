@@ -1,11 +1,11 @@
 //library created by the professmor to allow inputs without hitting enter
 import ansi_terminal.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Input {
@@ -14,10 +14,11 @@ private Entity entity;
 private Key key;
 private int movement = 0;
 private boolean run = true;
-ArrayList<String>room = new ArrayList<String>(); 
-PrintWriter pw;
-FileReader read;
-Scanner s;
+ArrayList<Item> Items = new ArrayList<Item>();
+ArrayList<Entity> entities;
+int floorNumber = 0;
+FileReader reader;
+Scanner s; 
 //constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
 public Input(){
 
@@ -48,12 +49,12 @@ switch(key) {
 		movement = 4;
 		break;
 	case I:
-		openInventory();
 		movement = 5;
+		openInventory();
 		break;
 	case i:
-		openInventory();
 		movement = 5;
+		openInventory();
 		break;
 	case H:
 		help();
@@ -77,6 +78,8 @@ while(run) {
 	System.out.println("Y. Drop item");
 	System.out.println("Z. Equip Weapon");
 	System.out.println("Q. Equip Armor");
+	System.out.println("S. Save Game");
+	System.out.println("L. Load Game");
 	System.out.println("R. Exit");
 	System.out.println("ESCAPE. quit the game");
 
@@ -111,6 +114,18 @@ while(run) {
 			break;
 		case q:
 			entity.getInventory().equipArmor();
+			break;
+		case S:
+			movement = 6;
+			break;
+		case s:
+			movement = 6;
+			break;
+		case L:
+			movement = 7;
+			break;
+		case l:
+			movement = 7;
 			break;
 		case R:
 			run = false;
@@ -147,6 +162,9 @@ public void help() {
 	System.out.println("$: is an item for the player to pick up");
 	System.out.println("Z: is a staircase to advance to the next floor");
 	System.out.println("Enter: to continue and confirm inventory choices");
+	System.out.println("Z: staircase to advance to next floor");
+	System.out.println("S: Save your current game");
+	System.out.println("L: Load a previously saved game");
 
 
 
@@ -155,32 +173,103 @@ public void help() {
 public void defaultTerminal() {
 	Terminal.cookedMode();
 }
+
 public ArrayList<String> getRoom(int roomNumber) {
-	int i = 0;
+	ArrayList<String> room = new ArrayList<String>();
+	Scanner s;
+	
 	try{
-		read = new FileReader("map" + roomNumber +".txt");
-		s = new Scanner(read);
+		 reader = new FileReader("map" + roomNumber +".txt");
+	
+		 s = new Scanner(reader);
 		while(s.hasNextLine()) {
 			String[] lines = s.nextLine().split(",");
-			String line = lines[i];
-			i = i + 1;
+			for(String a: lines) {	
+				room.add(a);
+			}
 		}
+		s.close();
+		reader.close();
 	}catch(FileNotFoundException e) {
 		System.out.println("File not Found!");
+	}catch(IOException ex) {
+		ex.printStackTrace();
+	}catch(Exception e) {
+		System.out.println("this is the all error");
 	}
+	System.out.println(room);
  	return room;
-	
-}
-public void store() {
+	}
+public void save(ArrayList<Entity> entityList, int floor) {
+	this.entities = entityList;
+	this.floorNumber = floor;
 	try{
-		pw = new PrintWriter(new File("Player.txt"));
-		pw.println(entity);
+		PrintWriter pw = new PrintWriter(new File("Entities.txt"));
+		for(Entity ent: entities) {
+				pw.println(ent.getIsPlayer());
+				pw.println(ent.getHealth());
+				pw.println(ent.getName());
+				Items  = ent.getInventory().getItems();
+				for(int j = 0; j < Items.size(); j++) {
+				Item tempItem = Items.get(j);
+				String ItemType = "";
+					
+				}
+				pw.println(ent.getXCoor());
+				pw.println(ent.getYCoor());
+				pw.println(ent.getIsItem());
+				pw.println(ent.getIsStairs());
+				pw.println(ent.getAIMovement());
+				pw.close();
+		}
+				
+	
+	}catch (FileNotFoundException e) {
+		System.out.println("File not found! failed to save");
+	}
+	try{
+		PrintWriter pw = new PrintWriter(new File("floor.txt"));
+		pw.println(floorNumber);
 		pw.close();
 	}catch (FileNotFoundException e) {
-		System.out.println("Failed to save file!");
-		return;
+		System.out.println("File not found! failed to save");
 	}
 }
-}
+public ArrayList<Entity> loadEntity() {
+	try{
+		 reader = new FileReader("Entities.txt");
+		s = new Scanner(reader);
+		//while(s.hasNextLine()) {
+			//entity = s.nextLine();
+			//entities.add(entity);
 
+		//}
+		s.close();
+		reader.close();
+	}catch (FileNotFoundException e){
+		System.out.println("File not found! failed to load");
+	}catch(IOException ex) {
+		ex.printStackTrace();
+	}
+	return entities;	
+
+}
+public int loadFloor() {
+	try{
+		 reader = new FileReader("floor.txt");
+		 s = new Scanner(reader);
+		while(s.hasNextLine()) {
+			floorNumber = s.nextInt();
+		}
+		s.close();
+		reader.close();
+	}catch (FileNotFoundException e) {
+		System.out.println("File not found! failed to load");
+	}catch(IOException ex) {
+		ex.printStackTrace();
+	}
+	System.out.println(floorNumber);
+	return floorNumber;
+}
+}
 
