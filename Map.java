@@ -97,6 +97,10 @@ public class Map{
 			String playerName = input.next();
 			createPlayer(playerName);
 
+			//bonus question that never gets used for anything
+			System.out.print("Are you a Wizard, a Knight, or a Thief?: ");
+			String characterClass = input.next();
+
 			//create non player items and entities
 			populate();
 
