@@ -242,7 +242,7 @@ public ArrayList<Entity> loadEntity() {
 		s = new Scanner(reader);
 		while(s.hasNextLine()) {
 			Entity listEntity;
-			listEntity.getIsPlayer;
+			listEntity.getIsPlayer().;
 
 		}
 		s.close();
