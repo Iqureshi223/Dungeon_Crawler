@@ -173,7 +173,7 @@ public void help() {
 public void defaultTerminal() {
 	Terminal.cookedMode();
 }
-
+//Transform text files into rooms for the players to enter to go the next floor
 public ArrayList<String> getRoom(int roomNumber) {
 	ArrayList<String> room = new ArrayList<String>();
 	Scanner s;
@@ -199,6 +199,7 @@ public ArrayList<String> getRoom(int roomNumber) {
 	}
  	return room;
 	}
+//saves the current floor the player is on and all the entities that exist on the floor
 public void save(ArrayList<Entity> entityList, int floor) {
 	this.entities = entityList;
 	this.floorNumber = floor;
@@ -236,6 +237,7 @@ public void save(ArrayList<Entity> entityList, int floor) {
 		System.out.println("File not found! failed to save");
 	}
 }
+//loads all the entities on the floor
 public ArrayList<Entity> loadEntity() {
 	entities = new ArrayList<Entity>();
 	try{
@@ -286,7 +288,6 @@ public ArrayList<Entity> loadEntity() {
 				
 				entity.getInventory().add(new Item(type, itemName, weight, value, strength));
 				test = s.nextLine();
-				System.out.println(test);
 				if(test.equals(".")) {
 					run = false;
 				}
@@ -304,6 +305,7 @@ public ArrayList<Entity> loadEntity() {
 	return entities;	
 
 }
+//loads up the floor the player saved
 public int loadFloor() {
 	try{
 		 reader = new FileReader("floor.txt");
