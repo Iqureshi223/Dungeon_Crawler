@@ -223,8 +223,8 @@ public void save(ArrayList<Entity> entityList, int floor) {
 					pw.println(tempItem.getStrength());
 				}
 				pw.println(".");
-				pw.close();
 		}
+		pw.close();
 	}catch (FileNotFoundException e) {
 		System.out.println("File not found! failed to save");
 	}
@@ -273,16 +273,25 @@ public ArrayList<Entity> loadEntity() {
 			}
 			int i = 0;
 			while(run) {
+				String lbs = test;
+				String networth = s.nextLine();
+				String itemName = s.nextLine();
+				String enumType = s.nextLine();
+				String muscle = s.nextLine();
 
-				if(i == 0) {
-					System.out.println(test);			
-				}else {
-					test = s.nextLine();
-					System.out.println(test);
-				}
+				int weight = Integer.parseInt(lbs);
+				int value = Integer.parseInt(networth);
+				ItemType type = ItemType.valueOf(enumType);
+				int strength = Integer.parseInt(muscle);
+				
+				entity.getInventory().add(new Item(type, itemName, weight, value, strength));
 				test = s.nextLine();
 				System.out.println(test);
-			}	
+				if(test.equals(".")) {
+					run = false;
+				}
+			}
+			entities.add(entity);	
 
 		}
 		s.close();
