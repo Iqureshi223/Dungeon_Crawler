@@ -207,12 +207,12 @@ public void save(ArrayList<Entity> entityList, int floor) {
 		for(Entity ent: entities) {
 				pw.println(ent.getIsPlayer());
 				pw.println(ent.getIsItem());
+				pw.println(ent.getIsStairs());
+				pw.println(ent.getAIMovement());
 				pw.println(ent.getHealth());
 				pw.println(ent.getName());
 				pw.println(ent.getXCoor());
 				pw.println(ent.getYCoor());
-				pw.println(ent.getIsStairs());
-				pw.println(ent.getAIMovement());
 				Items = ent.getInventory().getItems();
 				for(int j = 0; j < Items.size(); j++) {
 					Item tempItem = Items.get(j);
@@ -222,6 +222,7 @@ public void save(ArrayList<Entity> entityList, int floor) {
 					pw.println(tempItem.getType());
 					pw.println(tempItem.getStrength());
 				}
+				pw.println(".");
 				pw.close();
 		}
 	}catch (FileNotFoundException e) {
@@ -241,8 +242,47 @@ public ArrayList<Entity> loadEntity() {
 		reader = new FileReader("Entities.txt");
 		s = new Scanner(reader);
 		while(s.hasNextLine()) {
-		//	Entity listEntity;
-		//	listEntity.getIsPlayer().setIsPlayer(s.hasNextLine());
+			boolean run = true;
+			String personType = s.nextLine();
+			String itemType = s.nextLine();
+			String isStairs = s.nextLine();
+			String AIMovement = s.nextLine();
+			String Health = s.nextLine();
+			String Name = s.nextLine();
+			String XCoor = s.nextLine();
+			String YCoor = s.nextLine();
+			if(Boolean.parseBoolean(personType) == true) {
+				Player player = new Player(" ");
+				entity = player;
+			}else if(Boolean.parseBoolean(itemType) == true) {
+				ItemEntity item = new ItemEntity();
+				item.setIsStairs(Boolean.parseBoolean(isStairs));
+				entity = item;
+			}else{
+				Enemy enemy  = new Enemy();
+				enemy.setAIMovement(Boolean.parseBoolean(AIMovement));
+				entity = enemy;
+			}
+			entity.setHealth(Integer.parseInt(Health));
+			entity.setName(Name);
+			entity.setXCoor(Integer.parseInt(XCoor));
+			entity.setYCoor(Integer.parseInt(YCoor));
+			String test = s.nextLine();
+			if(test.equals(".")) {
+				run = false;
+			}
+			int i = 0;
+			while(run) {
+
+				if(i == 0) {
+					System.out.println(test);			
+				}else {
+					test = s.nextLine();
+					System.out.println(test);
+				}
+				test = s.nextLine();
+				System.out.println(test);
+			}	
 
 		}
 		s.close();
@@ -270,8 +310,6 @@ public int loadFloor() {
 	}catch(IOException ex) {
 		ex.printStackTrace();
 	}
-	System.out.println(floorNumber);
 	return floorNumber;
 }
 }
-
