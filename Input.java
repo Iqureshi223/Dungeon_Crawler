@@ -1,4 +1,3 @@
-//library created by the professmor to allow inputs without hitting enter
 import ansi_terminal.*;
 import java.util.ArrayList;
 import java.io.PrintWriter;
@@ -7,7 +6,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
+/**
+*the input class sets the terminal into raw mode to allow ani_terminal to
+*work then allows user key inputs without hitting enter also allows the
+*user to manage their inventory, equip equipment, save and load their game
+*and finally either exit the menu to get back to the game or exit the game
+*entirely.
+*@author Imaad Qureshi
+*/
 public class Input {
 //creates variables to use within the class as well as a Entity and key variable
 private Entity entity;
@@ -19,21 +25,42 @@ ArrayList<Entity> entities;
 int floorNumber = 0;
 FileReader reader;
 Scanner s; 
-//constructor that takes in an entity object as a parameter and initializes the entity and key variable and puts the terminal in a special view
+/**
+*blank constructor that initializes an Input object to allow usage of the
+*input class without going into terminal.rawmode().
+*/
 public Input(){
 
 
 }
+/**
+*a constructor that takes an entity object as a parameter, then saves that
+*into a entity variable, then it it calls on Terminal.rawMode() then
+*creates a key variable to let user start hitting input keys without having
+*to hit enter.
+*@param ent the entity object that needs to be passed in order to be stored.
+*/
 public Input(Entity ent) {
 this.entity = ent;
 Terminal.rawMode();
 key = Terminal.getKey();
 }
 //returns the value stored into key
+/**
+*output the value of the key input the user pressed when called upon.
+*@return the key the user pressed that is stored in the key variable.
+*/
 public Key getInput() {
 	return key;
 }
 //returns an integer that the map class uses to move the characters as well as access openInventory and help method
+/**
+*the method uses switch cases and checks the input the user inputted, then
+*it sets movement to an integer it keeps track of what the user is hitting
+*to move and if they want to access the menu options or look up the
+*instructions again
+*@return the movement variable with a value when called upon
+*/
 public int getMovement() {
 switch(key) {
 	case LEFT:
@@ -70,6 +97,11 @@ switch(key) {
 return movement;
 }
 //using the entity variable allows user to access the methods within Inventory to move around and equip their items. it also allows them to quit both the menu and the game
+/**
+*brings up the menu and options for the user to use it will either print out
+*the inventory, drop an item from the inventory, equip an armor or sword,
+*save and load the game, exit the menu, and quit out the game.
+*/
 public void openInventory() {
 //the while loop the runs while the user is operating the inventory menu. will not stop until the user chooses the option to quit
 while(run) {
@@ -144,6 +176,9 @@ while(run) {
 }
 }
 //displays instructions on how to play the game
+/**
+*prints out instructions on how to play the game.
+*/
 public void help() {
 	System.out.println("Arrow Keys to move");
 	System.out.println("I: access menus to modify inventory and game settings");
@@ -170,10 +205,25 @@ public void help() {
 
 }
 //returns the terminal back to the default mode 
+/**
+*returns the terminal back into the default mode.
+*/
 public void defaultTerminal() {
 	Terminal.cookedMode();
 }
 //Transform text files into rooms for the players to enter to go the next floor
+/**
+*it takes an integer parameter to specify which map text file to use
+*reads in text files that layouts for the rooms, it splits each element into
+*the text file by a comma then sets that inside a string array then adds the
+*current elements into the room ArrayList before reinitializing the array
+*for the next line then returns the room arraylist.
+*@param roomNumber takes a roomNumber to specify which of 
+*the map files to use.
+*@return the String ArrayList containing an ArrayList of new strings.
+*@throws FileNotFoundException if it can't find any of the map files specify.
+*@throws IOException when the file writer can preform a certain task anymore.
+*/
 public ArrayList<String> getRoom(int roomNumber) {
 	ArrayList<String> room = new ArrayList<String>();
 	Scanner s;
@@ -194,12 +244,15 @@ public ArrayList<String> getRoom(int roomNumber) {
 		System.out.println("File not Found!");
 	}catch(IOException ex) {
 		ex.printStackTrace();
-	}catch(Exception e) {
-		System.out.println("this is the all error");
 	}
+
  	return room;
 	}
 //saves the current floor the player is on and all the entities that exist on the floor
+/**
+*takes in a arraylist type entity parameter and a integer as a parameter as well saves what is stored in the ArrayList and the integer variable to a text file.
+*@throws FileNotFoundException throws if it cannot find the file to save to.
+*/
 public void save(ArrayList<Entity> entityList, int floor) {
 	this.entities = entityList;
 	this.floorNumber = floor;
@@ -238,6 +291,12 @@ public void save(ArrayList<Entity> entityList, int floor) {
 	}
 }
 //loads all the entities on the floor
+/**
+*creates a series of entity objects and their item objects from the save file and store them into an ArrayList then return that arraylist
+*@return the entities Arraylist that contains a bunch of entity objects and their item objects.
+*@throws FileNotFoundException throws an exception if it can't find a file to load from.
+*@throws IOException throws an exception when the file reader can't perform any actions due to a conflict.
+*/
 public ArrayList<Entity> loadEntity() {
 	entities = new ArrayList<Entity>();
 	try{
@@ -306,6 +365,12 @@ public ArrayList<Entity> loadEntity() {
 
 }
 //loads up the floor the player saved
+/**
+*loads up the floor text file and saves the value to an integer then returns that integer.
+*@return the value of the variable.
+*@throws FileNotFoundException throws if it can't find floors.txt.
+*@throws IOException if file reader can't perform due to a confliction
+*/
 public int loadFloor() {
 	try{
 		 reader = new FileReader("floor.txt");
