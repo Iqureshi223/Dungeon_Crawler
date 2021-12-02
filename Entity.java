@@ -10,6 +10,7 @@ public class Entity
 	protected boolean isItem;
 	protected boolean isStairs;
 	protected boolean AIMovement;
+	protected boolean isConsumbale;
 		
 	//constructor for entity with set name (enemy)
 	public Entity()
@@ -22,6 +23,7 @@ public class Entity
 		yCoor = 1;
 		isStairs = false;
 		AIMovement = false;
+		isConsumable = false;
 	}
 	
 	//returns name
@@ -72,6 +74,11 @@ public class Entity
 		return AIMovement;
 	}
 
+	//returns isConsumbale
+	public boolean getIsConsumable()
+	{
+		return isConsumable;
+	}
 	//adds health to health
 	public void setHealth(int addHealth)
 	{
@@ -100,6 +107,11 @@ public class Entity
 	{
 		name = word;
 	}
-
+	
+	//sets isConsumbale
+	public void setisConsumable(boolean consume)
+	{
+		isConsumable = consume;
+	}
 	
 }
