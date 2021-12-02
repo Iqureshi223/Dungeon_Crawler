@@ -6,7 +6,11 @@ public class ItemEntity extends Entity
 	{
 		super();
 		isItem = true;
-		isStairs = false;		
+		isStairs = false;
+		if (name == "Food Stuffs" || name == "Healing Potions" || name == "Mana Potions" || name == "Antidotes")
+		{
+			isConsumable = true;
+		}		
 	}
 
 	public boolean getIsItem()
