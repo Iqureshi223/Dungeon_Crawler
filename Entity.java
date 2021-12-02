@@ -10,7 +10,7 @@ public class Entity
 	protected boolean isItem;
 	protected boolean isStairs;
 	protected boolean AIMovement;
-	protected boolean isConsumbale;
+	protected boolean isConsumable;
 		
 	//constructor for entity with set name (enemy)
 	public Entity()

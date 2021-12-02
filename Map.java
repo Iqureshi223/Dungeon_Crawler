@@ -4,11 +4,13 @@
  * 10/25/2021
  * Dugneon Crawler Project
  * Map Class
- *
+ */
+/**
  * This class creates the initial map and holds any updates to the map,
  * it also stores the positions of entities on the map and runs a few
  * map related methods like combat, movement updates, and printing the
  * new map.
+ * @author Bryan Potts
  */
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -67,7 +69,42 @@ public class Map{
 	//enemy control variable
 	int numEnemy = 0;
 
+	/**
+	*Default constructor for the Map Class.
+	*This constructor sets up the map for the game as well as populating it.
+	*This can call methods for loading the state of the game.
+	*This constructor gets user input related to setting up the map.
+	*This constructor will call on Entity classes and the Input class.
+	*/
 	public Map(){
+
+		//test code
+		System.out.println("test start");
+		boolean testb = true;
+		int countT = 0;
+		map = DEFAULT_MAP;
+		while(testb){
+			createItem();
+			//System.out.println("A");
+			ArrayList<Item> items = entities.get(0).getInventory().getItems();
+			//System.out.println("B");
+			for(int i = 0; i < items.size(); i++){
+				//System.out.println("for start");
+				String n = items.get(i).getName();
+				if(n.equals("Healing Potions")){
+					System.out.println(entities.get(0).getIsConsumable());
+					testb = false;
+				}
+				//System.out.println("for end");
+			}
+			entities.remove(0);
+			if(countT >= 100){
+				testb = false;
+			}
+			System.out.println(countT);
+			countT++;
+		}
+	
 		boolean load = askLoad();
 		if(load){
 			loadMap();
@@ -108,8 +145,17 @@ public class Map{
 			firstMap();
 		}
 	}
-
+	
 	//check if player wants to load the save file
+	/**
+	*This method asks the user if they want to load the save file.
+	*This is called from the constructor.
+	*This method accepts yes/no input and returns a boolean that is is true only
+	*in the case the response is a yes. If the response is a no or otherwise not handled then it returns
+	*false. User input that is neither yes or no is returns false and prints a message indicating that the input
+	*is not a valid input.
+	*@return a boolean
+	*/
 	public boolean askLoad(){
 		System.out.print("Would you like to load the save file? (Y/N): ");
 		Scanner input = new Scanner(System.in);
@@ -146,6 +192,11 @@ public class Map{
 	}
 	
 	//populate the floor
+	/**
+	*This method puts items, enemies, and the stairs on the map.
+	*All of these things are Entity class objects stored in a list in the class.
+	*This adds them to the list to be used by other methods.
+	*/
 	public void populate(){
 		createItem();
                 createItem();
@@ -157,6 +208,11 @@ public class Map{
 	}
 
 	//depopulates the floor
+	/**
+	*This method removes items, enemies, and the stairs from the map.
+	*All of the things are Entity class objects stroed in a list in the class.
+	*This removes them from the list so that they can no longer be used.
+	*/
 	public void depopulate(){
 		while(entities.size() > 2){
 			for(int i = 1; i < entities.size(); i++){
@@ -168,6 +224,11 @@ public class Map{
 	}
 
 	//moves the player between floors
+	/**
+	*This method moves the player to an open spot on the map.
+	*This method will move the player to any spot on the map not currently in use, 
+	*as long as the spot is a spot that the user could normally move on during gameplay.
+	*/
 	public void movePlayer(){
 		Entity entity = getPlayer();
 		boolean createCheck = false;
@@ -186,6 +247,11 @@ public class Map{
 	}
 	
 	//print the map
+	/**
+	*This method outputs the map to the user.
+	*The method takes the currently map in use as well as the position of all things on the map 
+	*and outputs it to the user's terminal window.
+	*/
 	public void printMap(){
 		for(int i = 0; i < MAP_SIZE_X; i++){
 			for(int j = 0; j < MAP_SIZE_Y; j++){
@@ -196,6 +262,13 @@ public class Map{
 	}
 
 	//finds the player in the arraylist
+	/**
+	*This method finds the player on the map.
+	*This method will find the player's Entity object in the list it is stored in and return it when called.
+	*The Entity class object this returns should be the player but if the player cannot be found it will return a special 
+	*Entity object, this object is not the player but is used to prevent compiling errors.
+	*@return an Entity class object
+	*/
 	public Entity getPlayer(){
 		for(int i = 0; i < entities.size(); i++){
 			if(entities.get(i).getIsPlayer()){
@@ -206,7 +279,12 @@ public class Map{
 		return entities.get(0); //this returns the BAD entity
 	}
 	
-	//creates a player
+	//creates a player 
+	/**
+	*This method creates a Player and puts them on the map.
+	*This creates an Entity Player object and adds it to the list that is used for updating the map
+	*@param name a String
+	*/
 	public void createPlayer(String name){
 		Player player = new Player(name);
 		player.setXCoor(5);
@@ -218,6 +296,13 @@ public class Map{
 	}
 
 	//give entity starting items
+	/**
+	*This method generates a new weapon and armor for an Entity.
+	*This method takes an Entity object, accesses it's inventory, and gives it a weapon and armor to start with.
+	*This was originally intended only to be used on the player which is why the parameter is named player, but it can be 
+	*used with any Entity object.
+	*@param player an Entity object
+	*/
 	public void startItems(Entity player){
 		boolean setup = false;
 		int itemNum = 0;
@@ -245,6 +330,11 @@ public class Map{
 	}
 
 	//creates a non-player entitiy
+	/**
+	*This method creates Enemies.
+	*This method creates an Entity object that acts as an enemy, and adds it to the list of Entities to referrenced later.
+	*It was orignally intended to create more than just enemies but that proved inefficient, but the name still reflects that intent.
+	*/
 	public void createEntity(){
 		Enemy entity = new Enemy();
 		boolean createCheck = false;
@@ -279,6 +369,11 @@ public class Map{
 	}
 
 	//place BAD entity outside map
+	/**
+	*This method moves the BAD Entity.
+	*The BAD entity is an Entity object that does not act as a normal entity. It exists for debug purposes.
+	*This method moves this Entity off the accessible parts of the map so that the player never interacts with it.
+	*/
 	public void moveBAD(){
 		Entity bad = entities.get(0);
 		bad.setXCoor(0);
@@ -287,6 +382,11 @@ public class Map{
 	}
 
 	//first time map setup
+	/**
+	*This method sets up the map one time.
+	*This method gets all Entity data from the list and puts them on the map in the right spot.
+	*This method also outputs the map to the user's termial afterwords.
+	*/
 	public void firstMap(){
 		//clears the map
                 for(int i = 0; i < MAP_SIZE_X; i++){
@@ -324,7 +424,11 @@ public class Map{
 		printMap();
 	}
 	
-
+	/**
+	*This method moves all Entity objects.
+	*This method goes updates the map with the new positions of all Entities stored in the list.
+	*This method must be called from the main class to to start the game.
+	*/
 	//moves all entities
 	public void moveAll(){
 		while(runtime){		
@@ -399,6 +503,14 @@ public class Map{
 		}		
 	}
 	
+	/**
+	*This method performs interactions between Entity objects.
+	*This method handles all forms of interactions between Entity objects. 
+	*This can be used with any Entity.
+	*Originally only intended only for combat interactions but has been explanded to cover all interactions.
+	*@param attacker an Entity object, the one performing the action
+	*@param defender an Entity object, the one the action is happening to
+	*/
 	public void combat(Entity attacker, Entity defender){
 		Inventory AInv = attacker.getInventory();
 		Inventory DInv = defender.getInventory();
@@ -560,6 +672,11 @@ public class Map{
 		}
 	}
 
+	/**
+	*This method creates an ItemEntity object.
+	*This method creates and Entity object of the ItemEntity class that acts as an item for the user to interact with.
+	*This Entity is added to the Entity list.
+	*/
 	public void createItem(){
 		//this method creates an entity that is just an item, needs an entity to take an item from it's inventory
 		//creates and adds an item entity
@@ -587,7 +704,13 @@ public class Map{
                 entities.add(entity);
 	}
 
+	
 	//this method creates the stairs
+	/**
+	*This method creates stairs to advance to the next floor.
+	*This method creates an Entity object that when interacted with will allow the user to advance to the next floor.
+	*This Entity is added to the Entity list.
+	*/
 	public void createStairs(){
                 ItemEntity entity = new ItemEntity();
                 boolean createCheck = false;
@@ -615,6 +738,14 @@ public class Map{
 	}
 
 	//this determines movement for entities
+	/**
+	*This method determines how Entities will move.
+	*This method calculates a new position for an Entity.
+	*This method takes into consideration the type of Entity as well.
+	*This can be used for ALL Entity types.
+	*This can also call on the combat method which handles interactions.
+	*@param entity an Entity object
+	*/
 	public void movement(Entity entity){
 		if(entity.getIsPlayer()){
 			//determine based off input class
@@ -801,6 +932,11 @@ public class Map{
 	}
 	
 	//loads in a map from a text file
+	/**
+	*This method loads in a new map from a file.
+	*This method opens a file and checks its contents and creates a new map based off the contents of the file.
+	*The map is then used to update the current map.
+	*/
 	public void ImportMap(){
 		try{
 			//System.out.println(1); //test line
@@ -833,6 +969,10 @@ public class Map{
 	}
 
 	//change floors
+	/**
+	*This method changes and readies a new map.
+	*This method removes all Entities from the list, loads in the new map, moves the player to an open spot, and adds in new Entities to the list.
+	*/
 	public void changeFloors(){
 		depopulate();
 		ImportMap();
@@ -846,6 +986,10 @@ public class Map{
 	}
 
 	//this saves all the entities to be loaded in later
+	/**
+	*This method saves all Entities and the map.
+	*All Entities in the list and the current map are passed to the Input classes to be saved to a file.
+	*/
 	public void save(){
 		//this should pass the arraylist of entities and save them to files, also passes in the floor number
 		Input input = new Input();
@@ -853,22 +997,27 @@ public class Map{
 	}
 
 	//this loads all entities from
+	/**
+	*This method loads in Entities.
+	*This method loads in Entities from a file and adds them to  the list.
+	*/
 	public void loadEntities(){
 		//this should recieve an arraylist of entities and update the map arraylist
 		Input input = new Input();
 		entities = input.loadEntity();
-		//currently uninished
 	}
 		
 	//load in saved map info
+	/**
+	*This method loads in the saved map.
+	*This method changes the floor number which is used to determine which map file to load.
+	*Then the corresponding map file is loaded.
+	*/
 	public void loadMap(){
 		//this should read in a number from a file and change currentFloor and call ImportMap()
 		Input input = new Input();
 		currentFloor = input.loadFloor();
 		ImportMap();
-		//currently unfinished
 	}
-
-
 
 }
