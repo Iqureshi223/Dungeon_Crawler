@@ -5,7 +5,11 @@
  */
 
 //This class is used to create randomised items for the main and inventory classes
-
+/**
+*This class generates randomized Item objects.
+*This class uses random number generators and an array of prexisting string variables to create a randomized Item object.
+*@author Bryan Potts
+*/
 import java.util.Random;
 public class ItemGenerator{
 	
@@ -18,6 +22,16 @@ public class ItemGenerator{
 	private static String[] namesOther = {"Food Stuffs", "Magic Lantern", "Thick Rope", "Magic Tomes", "Healing Potions", "Mana Potions", "Gemstones", "Antidotes", "Necklaces", "Magic Rings"};
 
 	//item generator method
+	/**
+	*This method generates a random Item.
+	*This method creates a randomized Item object and returns that item.
+	*The ItemType is selected using a random number generator (RNG).
+	*The name is selected from an array of prexisting names, the array used is dependant on ItemType.
+	*The weight is randomly generated. using an RNG.
+	*The strength uses the weight and an RNG to calculate a value.
+	*The value uses weight, strength, and RNG to generate an int.
+	*@return an Item object
+	*/
 	public static Item generate(){
 		
 		//variables
