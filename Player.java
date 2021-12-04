@@ -1,6 +1,15 @@
 
 public class Player extends Entity
 {
+	/**
+	 * @author Cooper Fulton
+	 * the class creates a player object that extends the entity class 
+	 */
+
+	/**
+	 * constructor creates a player with isPlayer set to true
+	 * @param name
+	 */
 	public Player(String name)
 	{
 		this.name = name;
@@ -10,7 +19,10 @@ public class Player extends Entity
 		xCoor = 0;
 		yCoor = 0;
 	}
-	//modifies isPlayer
+	/**
+	 * modifies isPlayer
+	 * @param play
+	 */
 	public void setIsPlayer(boolean play)
 	{
 		isPlayer = play;

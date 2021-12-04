@@ -39,58 +39,58 @@ public class Entity
 	{
 		return name;
 	}
-	/**@returns health
+	/**@return health
 	 */
 	public int getHealth()
 	{
 		return health;
 	}
-	/**@returns inventory
+	/**@return inventory
 	 */
 	public Inventory getInventory()
 	{
 		return inventory;
 	}
-	/**@returns isPlayer
+	/**@return isPlayer
 	 */
 	public boolean getIsPlayer()
 	{
 		return isPlayer;
 	}
-	/**@returns xCoor
+	/**@return xCoor
 	 */
 	public int getXCoor()
 	{
 		return xCoor;
 	}
-	/**@returns yCoor
+	/**@return yCoor
 	 */
 	public int getYCoor()
 	{
 		return yCoor;
 	}
-	/**@returns isItem
+	/**@return isItem
 	 */
 	public boolean getIsItem()
 	{
 		return isItem;
 	}
 	
-	/**@returns isStairs
+	/**@return isStairs
 	 */
 	public boolean getIsStairs()
 	{
 		return isStairs;
 	}
 
-	/**@returns AIMovement
+	/**@return AIMovement
 	 */
 	public boolean getAIMovement()
 	{
 		return AIMovement;
 	}
 
-	/**@returns isConsumbale
+	/**@return isConsumbale
 	 */
 	public boolean getIsConsumable()
 	{
