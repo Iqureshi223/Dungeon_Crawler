@@ -7,7 +7,7 @@ public class ItemEntity extends Entity
 		super();
 		isItem = true;
 		isStairs = false;
-		if (name == "Food Stuffs" || name == "Healing Potions" || name == "Mana Potions" || name == "Antidotes")
+		if (name.equals("Food Stuffs") || name.equals("Healing Potions") || name.equals("Mana Potions") || name.equals("Antidotes"))
 		{
 			isConsumable = true;
 		}		
