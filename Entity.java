@@ -1,6 +1,12 @@
 public class Entity
 
-{
+{	
+	/**
+	 * @author Cooper Fulton
+	 * the class creates an entity object with a name, health amount, inventory, and coordinates
+	 * the class also sets multiple boolean variables to determine what type of entity is created
+	 */
+
 	protected String name;
 	protected int health;
 	protected Inventory inventory;
@@ -12,7 +18,8 @@ public class Entity
 	protected boolean AIMovement;
 	protected boolean isConsumable;
 		
-	//constructor for entity with set name (enemy)
+	/**constructor for entity with set name (enemy)
+	 */
 	public Entity()
 	{
 		name = "Bob";
@@ -26,89 +33,111 @@ public class Entity
 		isConsumable = false;
 	}
 	
-	//returns name
+	/**@return name
+	 */
 	public String getName()
 	{
 		return name;
 	}
-	//returns health
+	/**@returns health
+	 */
 	public int getHealth()
 	{
 		return health;
 	}
-	//returns inventory
+	/**@returns inventory
+	 */
 	public Inventory getInventory()
 	{
 		return inventory;
 	}
-	//returns isPlayer
+	/**@returns isPlayer
+	 */
 	public boolean getIsPlayer()
 	{
 		return isPlayer;
 	}
-	//returns xCoor
+	/**@returns xCoor
+	 */
 	public int getXCoor()
 	{
 		return xCoor;
 	}
-	//returns yCoor
+	/**@returns yCoor
+	 */
 	public int getYCoor()
 	{
 		return yCoor;
 	}
-	//returns isItem
+	/**@returns isItem
+	 */
 	public boolean getIsItem()
 	{
 		return isItem;
 	}
 	
-	//returns isStairs
+	/**@returns isStairs
+	 */
 	public boolean getIsStairs()
 	{
 		return isStairs;
 	}
 
-	//returns AIMovement
+	/**@returns AIMovement
+	 */
 	public boolean getAIMovement()
 	{
 		return AIMovement;
 	}
 
-	//returns isConsumbale
+	/**@returns isConsumbale
+	 */
 	public boolean getIsConsumable()
 	{
 		return isConsumable;
 	}
-	//adds health to health
+	/**adds health to health
+	 * @param addHealth
+	 */
 	public void setHealth(int addHealth)
 	{
 		health += addHealth;
 	}	
-	//modifies xCoor
+	/**modifies xCoor
+	 * @param xChange
+	 */
 	public void setXCoor(int xChange)
 	{
 		xCoor = xChange;
 	}
 	
-	//modifies yCoor
+	/**modifies yCoor
+	 * @param yChange
+	 */
 	public void setYCoor(int yChange)
 	{
 		yCoor = yChange;
 	}
 	
-	//sets isItem
+	/**sets isItem
+	 * @param itemSet
+	 */
 	public void setIsItem(boolean itemSet)
 	{
 		isItem = itemSet;
 	}
 	
-	//sets name
+	/**sets name
+	 * @param word
+	 */
 	public void setName(String word)
 	{
 		name = word;
 	}
 	
-	//sets isConsumbale
+	/**sets isConsumbale
+	 * @param consume
+	 */
 	public void setisConsumable(boolean consume)
 	{
 		isConsumable = consume;
