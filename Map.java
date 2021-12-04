@@ -78,33 +78,6 @@ public class Map{
 	*/
 	public Map(){
 
-		//test code
-		System.out.println("test start");
-		boolean testb = true;
-		int countT = 0;
-		map = DEFAULT_MAP;
-		while(testb){
-			createItem();
-			//System.out.println("A");
-			ArrayList<Item> items = entities.get(0).getInventory().getItems();
-			//System.out.println("B");
-			for(int i = 0; i < items.size(); i++){
-				//System.out.println("for start");
-				String n = items.get(i).getName();
-				if(n.equals("Healing Potions")){
-					System.out.println(entities.get(0).getIsConsumable());
-					testb = false;
-				}
-				//System.out.println("for end");
-			}
-			entities.remove(0);
-			if(countT >= 100){
-				testb = false;
-			}
-			System.out.println(countT);
-			countT++;
-		}
-	
 		boolean load = askLoad();
 		if(load){
 			loadMap();
@@ -699,6 +672,16 @@ public class Map{
 		Inventory entityInv = entity.getInventory();
 		ItemGenerator genItem = new ItemGenerator();
 		entityInv.add(genItem.generate());
+		
+		//changes name ad consumable property
+		ArrayList<Item> eItems = entityInv.getItems();
+		Item tempItem = eItems.get(0);
+		entity.setName(tempItem.getName());
+		String name = entity.getName();
+		if (name.equals("Food Stuffs") || name.equals("Healing Potions") || name.equals("Mana Potions") || name.equals("Antidotes"))
+		{
+			entity.setisConsumable(true);
+		}
 
 		//add to arraylist
                 entities.add(entity);
