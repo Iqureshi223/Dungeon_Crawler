@@ -197,6 +197,7 @@ public void help() {
 	System.out.println("Y: drop an item in your inventory");
 	System.out.println("Z: equip a weapon");
 	System.out.println("Q: equip an Armor set");
+	System.out.println("C: to open a list of consumable items");
 	System.out.println("R: exit the game menu");
 	System.out.println("ESCAPE: exit the game");
 	System.out.println(".: an open spot the character can move on the map");
