@@ -1,5 +1,10 @@
 public class MainCrawler
 {
+	/** 
+	 * @author Cooper Fulton
+	 * This is the main class that runs the game
+	 * A map object is created and then the instructions to the game are displayed
+	 */
 	public static void main (String [] args)
 	{
 		//creates a map which runs the game and creates a setting and plot for the game
