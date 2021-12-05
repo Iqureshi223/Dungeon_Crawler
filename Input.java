@@ -20,6 +20,7 @@ private Entity entity;
 private Key key;
 private int movement = 0;
 private boolean run = true;
+private int newHealth = 0;
 ArrayList<Item> Items = new ArrayList<Item>();
 ArrayList<Entity> entities;
 int floorNumber = 0;
@@ -110,6 +111,7 @@ while(run) {
 	System.out.println("Y. Drop item");
 	System.out.println("Z. Equip Weapon");
 	System.out.println("Q. Equip Armor");
+	System.out.println("C. Consume an Item");
 	System.out.println("S. Save Game (EFFECT DOESN'T TAKE PLACE UNTIL EXITING MENU)");
 	System.out.println("L. Load Game (EFFECT DOESN'T TAKE PLACE UNTIL EXITING MENU)");
 	System.out.println("R. Exit");
@@ -147,6 +149,14 @@ while(run) {
 		case q:
 			entity.getInventory().equipArmor();
 			break;
+		case C:
+			System.out.println("your current health is " + entity.getHealth());
+			entity.setHealth(entity.getInventory().eatConsumables());
+			System.out.println("Your new health is " + entity.getHealth());
+		case c:
+			System.out.println("Your current health is " + entity.getHealth());
+			entity.setHealth(entity.getInventory().eatConsumables());
+			System.out.println("Your new health is " + entity.getHealth());
 		case S:
 			movement = 6;
 			break;

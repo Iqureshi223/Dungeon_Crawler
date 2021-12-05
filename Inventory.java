@@ -18,7 +18,7 @@ public class Inventory{
 	private int maxWeight;
 	private Item equippedWeapon;
 	private Item equippedArmor;
-	
+	private Item consumed;
 	//constructor
 	/**
 	*This is the Constructor for the Inventory class.
@@ -242,7 +242,47 @@ public class Inventory{
                         System.out.println("\nBad input. Aborting equip");
                 }
         }
+	/**
+	*this method gives the user a list of consumable items they can eat to heal themselves, it returns an integer returned by strength
+	* then removes the item from the Items Arraylist.
+	* @return the strength of the consumable item.
+	* @throws Exception throws in case user input a bad input (being the wrong input looking for).
+	*/
+	public int  eatConsumables() {
+		int counter = 1;
+		ArrayList<Integer> itemTracker  = new ArrayList<Integer>();
+		
+		System.out.println("\nUse a consumable: ");
 
+		for(int i = 0; i < items.size(); i++) {
+			Item currentItem = items.get(i);
+			
+			if(currentItem.getIsConsumable() == true) {
+				System.out.println(counter + ".\t" + currentItem.toString());
+				counter++;
+				itemTracker.add(i);
+			}
+		}
+		
+		//condition where there are no consumables in inventory
+		if(counter == 1){
+			System.out.println("\nOops, you have no consumables.");
+			return 0;
+		} 
+		System.out.println("\n: ");
+	
+		Scanner in = new Scanner(System.in);
+		
+		try{
+			int input = in.nextInt();
+			consumed = items.get(itemTracker.get(input - 1));
+			items.remove(consumed);
+			System.out.println("\n" + consumed.getName() + " has added " + consumed.getStrength() + " tohealth");	
+		}catch(Exception e) {
+			System.out.println("\nBad input. Aborting equip");
+		}	
+		return consumed.getStrength();
+	}
 	//returns equippedWeapon
 	/**
 	*Gets the equipped weapon.
