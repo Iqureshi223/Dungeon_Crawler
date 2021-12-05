@@ -77,7 +77,8 @@ public class Map{
 	*This constructor will call on Entity classes and the Input class.
 	*/
 	public Map(){
-
+		
+		//start of contructor
 		boolean load = askLoad();
 		if(load){
 			loadMap();

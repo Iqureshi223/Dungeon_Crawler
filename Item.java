@@ -18,6 +18,7 @@ public class Item{
 	private int weight;
 	private int value;
 	private int strength;
+	private boolean isConsumable;
 
 	//constructor
 	/**
@@ -35,6 +36,12 @@ public class Item{
 		this.weight = weight;
 		this.value = value;
 		this.strength = strength;
+		if (name.equals("Food Stuffs") || name.equals("Healing Potions") || name.equals("Mana Potions") || name.equals("Antidotes")){
+			isConsumable = true;
+		}
+		else{
+			isConsumable = false;
+		}
 	}
 
 	//get methods
@@ -82,6 +89,15 @@ public class Item{
 	*/
 	public int getStrength(){
 		return strength;
+	}
+
+	/**
+	*Gets isConsumable.
+	*Get method for if the item can be used.
+	*@return a boolean
+	*/
+	public boolean getIsConsumable(){
+		return isConsumable;
 	}
 
 	//returns a string of the item's contents
