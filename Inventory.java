@@ -276,10 +276,11 @@ public class Inventory{
 		try{
 			int input = in.nextInt();
 			consumed = items.get(itemTracker.get(input - 1));
+
 			items.remove(consumed);
-			System.out.println("\n" + consumed.getName() + " has added " + consumed.getStrength() + " tohealth");	
+			System.out.println("\n" + consumed.getName() + " has added " + consumed.getStrength() + " to health");	
 		}catch(Exception e) {
-			System.out.println("\nBad input. Aborting equip");
+			System.out.println("\nBad input. Aborting Consumables");
 		}	
 		return consumed.getStrength();
 	}

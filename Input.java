@@ -153,10 +153,12 @@ while(run) {
 			System.out.println("your current health is " + entity.getHealth());
 			entity.setHealth(entity.getInventory().eatConsumables());
 			System.out.println("Your new health is " + entity.getHealth());
+			break;	
 		case c:
 			System.out.println("Your current health is " + entity.getHealth());
 			entity.setHealth(entity.getInventory().eatConsumables());
 			System.out.println("Your new health is " + entity.getHealth());
+			break;
 		case S:
 			movement = 6;
 			break;
