@@ -18,7 +18,6 @@ public class Inventory{
 	private int maxWeight;
 	private Item equippedWeapon;
 	private Item equippedArmor;
-	private Item consumed;
 	//constructor
 	/**
 	*This is the Constructor for the Inventory class.
@@ -250,6 +249,7 @@ public class Inventory{
 	*/
 	public int  eatConsumables() {
 		int counter = 1;
+		Item consumed;
 		ArrayList<Integer> itemTracker  = new ArrayList<Integer>();
 		
 		System.out.println("\nUse a consumable: ");
@@ -278,11 +278,13 @@ public class Inventory{
 			consumed = items.get(itemTracker.get(input - 1));
 
 			items.remove(consumed);
-			System.out.println("\n" + consumed.getName() + " has added " + consumed.getStrength() + " to health");	
+			System.out.println("\n" + consumed.getName() + " has added " + consumed.getStrength() + " to health");
 		}catch(Exception e) {
 			System.out.println("\nBad input. Aborting Consumables");
-		}	
+			return 0;
+		}
 		return consumed.getStrength();
+	
 	}
 	//returns equippedWeapon
 	/**
